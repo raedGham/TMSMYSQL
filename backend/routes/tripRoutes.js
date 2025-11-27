@@ -20,14 +20,14 @@ const {
 
 router.post("/images/:id", upload.array("images", 10), addImages);
 router.get("/images/:id", getImages);
-router.delete("/:tripId/images/:imageId", protect, delImage);
+router.delete("/:tripId/images/:imageId", delImage);
 
 // TRIP ROUTES
 router.get("/check/:tripID/:userID", checkReservation);
 router.post("/new", uploadThumb.single("thumbnail"), newTrip);
 router.get("/", getTrips);
 router.get("/:id", getTrip);
-router.delete("/:id", protect, deleteTrip);
-router.patch("/:id", upload.none(), updateTrip);
+router.delete("/:id", deleteTrip);
+router.patch("/:id", uploadThumb.single("thumbnail"), updateTrip);
 
 module.exports = router;

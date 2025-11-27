@@ -11,8 +11,7 @@ import {
   selectReserv,
 } from "../../redux/features/reservation/ReservationSlice";
 
-import {updateStatus} from "../../services/reservationService";
-
+import { updateStatus } from "../../services/reservationService";
 
 const initialState = {
   paymentDate: "",
@@ -31,23 +30,21 @@ const AddPayment = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
- 
+
   // Use the selector you exported from the slice
 
   const isLoadingReserv = useSelector(selectIsLoading);
-  
-  useEffect(() => {
-      console.log("RESERVATIONID:", reservationID);      
-      dispatch(getReservation(reservationID));  
-   }, [dispatch, , reservationID]);
 
-  const reserv = useSelector(selectReserv);  
+  useEffect(() => {
+    dispatch(getReservation(reservationID));
+  }, [dispatch, , reservationID]);
+
+  const reserv = useSelector(selectReserv);
 
   // to calculate total price
   useEffect(() => {
-    
     if (reserv) {
-      const total = reserv.tripID.pricePerPerson * reserv.numberOfPeople || 0;
+      const total = reserv.trip.pricePerPerson * reserv.numberOfPeople || 0;
       setFormData((prev) => ({
         ...prev,
         amount: total,
@@ -55,68 +52,63 @@ const AddPayment = () => {
     }
   }, [reserv]);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
+  const addPaym = async (e) => {
+    console.log("ADD PAYMENT");
+    e.preventDefault();
 
-      const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-      };
+    // validation
+    if (!paymentDate) {
+      return toast.error("Please Specify Payment Date");
+    }
 
+    const paymentData = {
+      paymentDate: paymentDate,
+      amount: amount,
+      paymentMethod: paymentMethod,
+      reservationID,
+    };
 
+    setIsPaymentLoading(true);
+    // attempts to save the new trip
+    try {
+      console.log("-----------------");
+      console.log(paymentData);
+      const data = await registerPayment(paymentData);
+      if (data) {
+        await updateStatus(reservationID, "completed");
+      }
 
-      const addPaym = async (e) => {
-        console.log("ADD PAYMENT")
-        e.preventDefault();
+      toast.success("Payment Added Successfully");
+      navigate(-1);
+      setIsPaymentLoading(false);
+    } catch (error) {
+      setIsPaymentLoading(false);
+      toast.error(error.message);
+    }
+  };
 
-        // validation
-        if (!paymentDate) {
-          return toast.error("Please Specify Payment Date");
-        }
- 
-        const paymentData = {
-          paymentDate: paymentDate,
-          amount: amount,
-          paymentMethod: paymentMethod,
-          reservationID,
-        };
- 
-        setIsPaymentLoading(true);
-        // attempts to save the new trip
-        try {
-          console.log("registeringPayment")
-          const data = await registerPayment(paymentData);
-          if (data) {
-            await updateStatus(reservationID, "completed");
-          }
-
-
-          toast.success("Payment Added Successfully");
-          navigate(-1);
-          setIsPaymentLoading(false);
-        } catch (error) {
-          setIsPaymentLoading(false);          
-          toast.error(error.message);
-        }
-      };
-
-return (
-  <>
-    {reserv ? (
-      <PaymentForm
-        paymentDate={paymentDate}
-        amount={amount}
-        paymentMethod={paymentMethod}
-        reserv={reserv}
-        handleInputChange={handleInputChange}
-        addPaym={addPaym}
-        formTitle={"Add Payment"}
-      />
-    ) : (
-      <h1 className="m-[80px] text-white">No Data</h1>
-    )}
-  </>
-);
-  
+  return (
+    <>
+      {reserv ? (
+        <PaymentForm
+          paymentDate={paymentDate}
+          amount={amount}
+          paymentMethod={paymentMethod}
+          reserv={reserv}
+          handleInputChange={handleInputChange}
+          addPaym={addPaym}
+          formTitle={"Add Payment"}
+        />
+      ) : (
+        <h1 className="m-[80px] text-white">No Data</h1>
+      )}
+    </>
+  );
 };
 
 export default AddPayment;

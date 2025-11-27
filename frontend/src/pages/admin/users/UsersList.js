@@ -148,10 +148,10 @@ const UsersList = () => {
             </thead>
             <tbody>
               {currentItems.map((user, index) => {
-                const { _id, name, email, type } = user;
+                const { id, name, email, type } = user;
                 return (
                   <tr
-                    key={_id}
+                    key={id}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                   >
                     <td className="px-3 py-2">{index + 1}</td>
@@ -163,7 +163,7 @@ const UsersList = () => {
                           <select
                             value={type}
                             onChange={(e) =>
-                              handleChangeType(_id, e.target.value)
+                              handleChangeType(id, e.target.value)
                             }
                             className="
                                         px-2 py-1 
@@ -184,7 +184,7 @@ const UsersList = () => {
                         </td>
 
                         <td className="px-6 py-4 flex space-x-3">
-                          <button onClick={() => confirmDelete(_id)}>
+                          <button onClick={() => confirmDelete(id)}>
                             <FaTrashAlt
                               size={18}
                               className="text-red-600 hover:text-red-800"

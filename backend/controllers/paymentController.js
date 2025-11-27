@@ -18,7 +18,7 @@ const newPayment = asyncHandler(async (req, res) => {
     paymentDate,
     amount,
     paymentMethod,
-    reservationId: reservationID,
+    reservationID: reservationID,
   });
 
   res.status(201).json(payment);

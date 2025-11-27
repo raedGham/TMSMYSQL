@@ -14,7 +14,7 @@ const {
 router.post("/new", upload.none(), newPayment);
 router.get("/", getPayments);
 router.get("/:id", getPayment);
-router.delete("/:id", protect, deletePayment);
+router.delete("/:id", deletePayment);
 router.patch("/:id", upload.none(), updatePayment);
 
 module.exports = router;

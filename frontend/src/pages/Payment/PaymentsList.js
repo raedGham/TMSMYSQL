@@ -19,7 +19,7 @@ function PaymentsList() {
 
   const { payments } = useSelector((state) => state.payment);
   const userPayments = payments.filter(
-    (r) => r.reservationID.userID?.id === currUserID
+    (r) => String(r.reservation.userID) === String(currUserID)
   );
 
   console.log(payments);
@@ -57,26 +57,24 @@ function PaymentsList() {
                 <tbody>
                   {userPayments?.map((payment, index) => {
                     const {
-                      _id,
-                      reservationID,
+                      id,
+                      reservation,
                       paymentDate,
                       amount,
                       paymentMethod,
                     } = payment;
 
                     // Safely extract nested data
-                    const trip = reservationID?.tripID;
-                    const title = trip?.title;
-                    const thumbnail = trip?.thumbnail;
-                    const reservationDate = reservationID?.reservationDate;
+
+                    const reservationDate = reservation?.reservationDate;
 
                     return (
                       <tr
-                        key={_id}
+                        key={id}
                         className="bg-white border-b dark:bg-gray-800/60 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                       >
                         <td className="px-3 py-2">{index + 1}</td>
-                        <td className="px-3 py-2">{title}</td>
+                        <td className="px-3 py-2">{reservation.trip.title}</td>
                         <td className="px-3 py-2">
                           {new Date(reservationDate).toLocaleDateString(
                             "en-GB"
@@ -91,8 +89,8 @@ function PaymentsList() {
                         <td className="px-3 py-2">
                           <div className="rounded shadow-sm p-0 relative">
                             <img
-                              src={`${BACKEND_URL}/${thumbnail}`}
-                              alt={thumbnail || "Trip Image"}
+                              src={`${BACKEND_URL}/${reservation.trip.thumbnail}`}
+                              alt={reservation.trip.thumbnail || "Trip Image"}
                               className="w-auto h-32 object-cover rounded"
                             />
                           </div>

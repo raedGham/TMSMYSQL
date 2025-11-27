@@ -25,7 +25,7 @@ const TripsList = () => {
   const delTrip = async (id) => {
     await dispatch(deleteTrip(id));
     // await dispatch(fetchTrips());
-    navigate("/Main");
+    navigate(-1);
   };
 
   const confirmDelete = (id) => {

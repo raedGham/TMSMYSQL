@@ -12,41 +12,49 @@ const fs = require("fs");
 // --------------------------------------------------------------------
 const newTrip = asyncHandler(async (req, res) => {
   try {
-  const {
-    title,
-    destination,
-    demographic,
-    startDate,
-    endDate,
-    pricePerPerson,
-    organizerID,
-  } = req.body;
- console.log(organizerID);
+    const {
+      title,
+      destination,
+      demographic,
+      startDate,
+      endDate,
+      pricePerPerson,
+      organizerID,
+    } = req.body;
+    console.log(organizerID);
 
-  if (!title || !destination || !demographic || !startDate || !endDate || !req.file) {
-    return res.status(400).json({ message: "Please fill all required fields" });
-  }
+    if (
+      !title ||
+      !destination ||
+      !demographic ||
+      !startDate ||
+      !endDate ||
+      !req.file
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Please fill all required fields" });
+    }
 
-  const trip = await Trip.create({
-    title,
-    destination,
-    demographic,
-    startDate,
-    endDate,
-    pricePerPerson,
-    organizerID,
-    thumbnail:path.join("uploads", "thumbs", req.file.filename), 
-  });
+    const trip = await Trip.create({
+      title,
+      destination,
+      demographic,
+      startDate,
+      endDate,
+      pricePerPerson,
+      organizerID,
+      thumbnail: path.join("uploads", "thumbs", req.file.filename),
+    });
 
-  res.status(201).json(trip);
-} catch (error) {
-    console.error('Error creating trip:', error);
-    res.status(500).json({ 
-      message: 'Error creating trip', 
-      error: error.message 
+    res.status(201).json(trip);
+  } catch (error) {
+    console.error("Error creating trip:", error);
+    res.status(500).json({
+      message: "Error creating trip",
+      error: error.message,
     });
   }
-
 });
 
 // --------------------------------------------------------------------
@@ -54,7 +62,9 @@ const newTrip = asyncHandler(async (req, res) => {
 // --------------------------------------------------------------------
 const getTrips = asyncHandler(async (req, res) => {
   const trips = await Trip.findAll({
-    include: [{ model: User, as: "organizer", attributes: ["id", "name", "email"] }],
+    include: [
+      { model: User, as: "organizer", attributes: ["id", "name", "email"] },
+    ],
     order: [["startDate", "ASC"]],
   });
   res.status(200).json(trips);
@@ -65,7 +75,9 @@ const getTrips = asyncHandler(async (req, res) => {
 // --------------------------------------------------------------------
 const getTrip = asyncHandler(async (req, res) => {
   const trip = await Trip.findByPk(req.params.id, {
-    include: [{ model: User, as: "organizer", attributes: ["id", "name", "email"] }],
+    include: [
+      { model: User, as: "organizer", attributes: ["id", "name", "email"] },
+    ],
   });
 
   if (!trip) return res.status(400).json({ message: "Invalid trip" });
@@ -77,7 +89,15 @@ const getTrip = asyncHandler(async (req, res) => {
 // UPDATE TRIP
 // --------------------------------------------------------------------
 const updateTrip = asyncHandler(async (req, res) => {
-  const { title, destination, demographic, startDate, endDate, pricePerPerson, organizerID } = req.body;
+  const {
+    title,
+    destination,
+    demographic,
+    startDate,
+    endDate,
+    pricePerPerson,
+    organizerID,
+  } = req.body;
 
   const trip = await Trip.findByPk(req.params.id);
 
@@ -99,6 +119,7 @@ const updateTrip = asyncHandler(async (req, res) => {
 // DELETE TRIP
 // --------------------------------------------------------------------
 const deleteTrip = asyncHandler(async (req, res) => {
+  console.log(req.params.id);
   const trip = await Trip.findByPk(req.params.id);
 
   if (!trip) return res.status(400).json({ message: "Invalid trip" });
@@ -147,7 +168,9 @@ const getImages = asyncHandler(async (req, res) => {
 // --------------------------------------------------------------------
 const delImage = asyncHandler(async (req, res) => {
   const { tripId, imageId } = req.params;
-  const img = await TripImage.findOne({ where: { id: imageId, tripID: tripId } });
+  const img = await TripImage.findOne({
+    where: { id: imageId, tripID: tripId },
+  });
 
   if (!img) return res.status(404).json({ message: "Image not found" });
 

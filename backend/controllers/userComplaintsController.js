@@ -28,12 +28,22 @@ const newComplaint = asyncHandler(async (req, res) => {
 // --------------------------------------------------------------------
 const getComplaints = asyncHandler(async (req, res) => {
   const complaints = await Complaint.findAll({
-    include: [{ model: User, attributes: ["id", "name", "email"] }],
+    include: [
+      {
+        model: User,
+        as: "complainant", // alias for the user who filed the complaint
+        attributes: ["id", "name", "email"],
+      },
+      {
+        model: User,
+        as: "supervisor", // alias for the supervisor reviewing the complaint
+        attributes: ["id", "name", "email"],
+      },
+    ],
   });
 
   res.status(200).json(complaints);
 });
-
 // --------------------------------------------------------------------
 // GET SINGLE COMPLAINT
 // --------------------------------------------------------------------

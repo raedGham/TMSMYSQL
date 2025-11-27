@@ -65,7 +65,7 @@ function Register() {
       await dispatch(SET_EMAIL(data.email));
       await dispatch(SET_ID(data.id));
       await dispatch(SET_TYPE(data.type));
-      navigate("/main");
+      navigate(-1);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);

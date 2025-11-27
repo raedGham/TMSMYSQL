@@ -53,8 +53,8 @@ function AdminReservationList() {
                   {reserves.map((Reserv, index) => {
                     const {
                       id,
-                      userID,
-                      tripID,
+                      user,
+                      trip,
                       numberOfPeople,
                       status,
                       reservationDate,
@@ -66,25 +66,23 @@ function AdminReservationList() {
                         className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                       >
                         <td className="px-3 py-2">{index + 1}</td>
-                        <td className="px-3 py-2">{userID.name}</td>
-                        <td className="px-3 py-2">{tripID.title}</td>
+                        <td className="px-3 py-2">{user.name}</td>
+                        <td className="px-3 py-2">{trip.title}</td>
                         <td className="px-3 py-2">
                           {new Date(reservationDate).toLocaleDateString(
                             "en-GB"
                           )}
                         </td>
                         <td className="px-3 py-2">
-                          {new Date(tripID.startDate).toLocaleDateString(
-                            "en-GB"
-                          )}
+                          {new Date(trip.startDate).toLocaleDateString("en-GB")}
                         </td>
                         <td className="px-3 py-2">
-                          {new Date(tripID.endDate).toLocaleDateString("en-GB")}
+                          {new Date(trip.endDate).toLocaleDateString("en-GB")}
                         </td>
-                        <td className="px-3 py-2">{tripID.pricePerPerson}</td>
+                        <td className="px-3 py-2">{trip.pricePerPerson}</td>
                         <td className="px-3 py-2">{numberOfPeople}</td>
                         <td className="px-3 py-2">
-                          {tripID.pricePerPerson * numberOfPeople}
+                          {trip.pricePerPerson * numberOfPeople}
                         </td>
                         <td className="px-3 py-2">{status}</td>
                       </tr>

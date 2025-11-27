@@ -27,7 +27,7 @@ const ActivitiesList = () => {
   const delActivity = async (id) => {
     await dispatch(deleteActivity(id));
     // await dispatch(fetchActivities());
-    navigate("/Main");
+    navigate(-1);
   };
 
   const confirmDelete = (id) => {
@@ -67,6 +67,10 @@ const ActivitiesList = () => {
   };
 
   const { activities, loading, error } = useSelector((state) => state.activity);
+  const tripActivities = activities.filter(
+    (t) => String(t.tripID) === String(tripID)
+  );
+
   useEffect(() => {
     dispatch(fetchActivities());
   }, [dispatch]);
@@ -91,7 +95,7 @@ const ActivitiesList = () => {
   //   End Pagination
 
   useEffect(() => {
-    dispatch(FILTER_ACTIVITIES({ activities, search }));
+    dispatch(FILTER_ACTIVITIES({ activities: tripActivities, search }));
   }, [activities, search, dispatch]);
 
   return (

@@ -11,6 +11,7 @@ import { BACKEND_URL } from "../../services/tripService";
 function UserReservationList() {
   const dispatch = useDispatch();
   const userID = useSelector(selectUserID);
+
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
@@ -18,7 +19,10 @@ function UserReservationList() {
   }, [dispatch]);
 
   const { reserves } = useSelector((state) => state.reservation);
-  const userReserves = reserves.filter((r) => r.userID.id === userID);
+
+  const userReserves = reserves.filter(
+    (r) => String(r.userID) === String(userID)
+  );
 
   return (
     <div className="">
@@ -58,8 +62,8 @@ function UserReservationList() {
                 <tbody>
                   {userReserves.map((Reserv, index) => {
                     const {
-                      _id,
-                      tripID,
+                      id,
+                      trip,
                       numberOfPeople,
                       status,
                       reservationDate,
@@ -67,35 +71,33 @@ function UserReservationList() {
 
                     return (
                       <tr
-                        key={_id}
+                        key={id}
                         className="bg-white border-b dark:bg-gray-800/60 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                       >
                         <td className="px-3 py-2">{index + 1}</td>
-                        <td className="px-3 py-2">{tripID.title}</td>
+                        <td className="px-3 py-2">{trip.title}</td>
                         <td className="px-3 py-2">
                           {new Date(reservationDate).toLocaleDateString(
                             "en-GB"
                           )}
                         </td>
                         <td className="px-3 py-2">
-                          {new Date(tripID.startDate).toLocaleDateString(
-                            "en-GB"
-                          )}
+                          {new Date(trip.startDate).toLocaleDateString("en-GB")}
                         </td>
                         <td className="px-3 py-2">
-                          {new Date(tripID.endDate).toLocaleDateString("en-GB")}
+                          {new Date(trip.endDate).toLocaleDateString("en-GB")}
                         </td>
-                        <td className="px-3 py-2">{tripID.pricePerPerson}</td>
+                        <td className="px-3 py-2">{trip.pricePerPerson}</td>
                         <td className="px-3 py-2">{numberOfPeople}</td>
                         <td className="px-3 py-2">
-                          {tripID.pricePerPerson * numberOfPeople}
+                          {trip.pricePerPerson * numberOfPeople}
                         </td>
                         <td className="px-3 py-2">{status}</td>
                         <td className="px-3 py-2">
                           <div className="rounded shadow-sm p-0 relative">
                             <img
-                              src={`${BACKEND_URL}/${tripID.thumbnail}`}
-                              alt={tripID.thumbnail || "trip image"}
+                              src={`${BACKEND_URL}/${trip.thumbnail}`}
+                              alt={trip.thumbnail || "trip image"}
                               className="w-auto h-32 object-cover rounded"
                             />
                           </div>
@@ -106,7 +108,7 @@ function UserReservationList() {
                             to={
                               status === "completed"
                                 ? "#"
-                                : `/payment/new/${_id}`
+                                : `/payment/new/${id}`
                             }
                             onClick={(e) =>
                               status === "completed" && e.preventDefault()

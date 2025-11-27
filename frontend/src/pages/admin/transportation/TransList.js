@@ -27,7 +27,7 @@ const TransesList = () => {
   const delTrans = async (id) => {
     await dispatch(deleteTrans(id));
     // await dispatch(fetchTranses());
-    navigate("/Main");
+    navigate(-1);
   };
 
   const confirmDelete = (id) => {
@@ -67,6 +67,10 @@ const TransesList = () => {
   };
 
   const { transes, loading, error } = useSelector((state) => state.trans);
+  const tripTranses = transes.filter(
+    (t) => String(t.tripID) === String(tripID)
+  );
+
   useEffect(() => {
     dispatch(fetchTranses());
   }, [dispatch]);
@@ -91,7 +95,7 @@ const TransesList = () => {
 
   useEffect(() => {
     console.log("FROM USEEFFECT:", transes);
-    dispatch(FILTER_TRANSES({ transes, search }));
+    dispatch(FILTER_TRANSES({ transes: tripTranses, search }));
   }, [transes, search, dispatch]);
 
   return (
@@ -184,12 +188,6 @@ const TransesList = () => {
                       <td className="px-3 py-2">{costPerTrip}</td>
 
                       <td className="px-6 py-4 flex space-x-3">
-                        <Link to={`/admin/transes/trip-info/${id}`}>
-                          <AiOutlineEye
-                            size={20}
-                            className="text-purple-600 hover:text-purple-800"
-                          />
-                        </Link>
                         <Link to={`/admin/trans/edit/${id}`}>
                           <FaEdit
                             size={20}

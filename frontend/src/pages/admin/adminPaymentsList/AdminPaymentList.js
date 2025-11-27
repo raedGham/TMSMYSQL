@@ -51,18 +51,11 @@ function PaymentsList() {
                   {payments?.map((payment, index) => {
                     const {
                       id,
-                      reservationID,
+                      reservation,
                       paymentDate,
                       amount,
                       paymentMethod,
                     } = payment;
-
-                    // Safely extract nested data
-                    const trip = reservationID?.tripID;
-                    const title = trip?.title;
-                    const userID = reservationID?.userID;
-                    const username = userID?.name;
-                    const reservationDate = reservationID?.reservationDate;
 
                     return (
                       <tr
@@ -70,12 +63,12 @@ function PaymentsList() {
                         className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                       >
                         <td className="px-3 py-2">{index + 1}</td>
-                        <td className="px-3 py-2">{username}</td>
-                        <td className="px-3 py-2">{title}</td>
+                        <td className="px-3 py-2">{reservation.user.name}</td>
+                        <td className="px-3 py-2">{reservation.trip.title}</td>
                         <td className="px-3 py-2">
-                          {new Date(reservationDate).toLocaleDateString(
-                            "en-GB"
-                          )}
+                          {new Date(
+                            reservation.reservationDate
+                          ).toLocaleDateString("en-GB")}
                         </td>
                         <td className="px-3 py-2">
                           {new Date(paymentDate).toLocaleDateString("en-GB")}

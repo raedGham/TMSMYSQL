@@ -9,7 +9,6 @@ const activityFilterSlice = createSlice({
   initialState,
   reducers: {
     FILTER_ACTIVITIES(state, action) {
-     
       const { activities, search } = action.payload;
       const tempActivities = activities.filter((activity) =>
         activity.name.toLowerCase().includes(search.toLowerCase())
