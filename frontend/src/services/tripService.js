@@ -10,6 +10,9 @@ const API_URL = `${BACKEND_URL}/api/trips`;
 export const registerTrip = async (tripData) => {
   try {
     const formData = new FormData();
+    console.log("---------------------")
+    console.log("tripData", tripData);
+    
     formData.append("title", tripData.title);
     formData.append("destination", tripData.destination);
     formData.append("demographic", tripData.demographic);
@@ -19,17 +22,13 @@ export const registerTrip = async (tripData) => {
     formData.append("organizerID", tripData.organizerID);
     if (tripData.thumbnail) formData.append("thumbnail", tripData.thumbnail);
 
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}:`, value);
-    }
-
-    const response = await axios.post(
+     const response = await axios.post(
       `${BACKEND_URL}/api/trips/new`,
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },
-      },
-      { withCredentials: true }
+        withCredentials: true ,
+      },      
     );
     if (response.statusText === "OK") {
       toast.success("Trip Created Sucessfully");

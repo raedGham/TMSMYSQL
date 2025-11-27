@@ -155,7 +155,7 @@ const TransesList = () => {
               <tbody>
                 {currentItems.map((trip, index) => {
                   const {
-                    _id,
+                    id,
                     type,
                     arrivalLocation,
                     departureLocation,
@@ -166,7 +166,7 @@ const TransesList = () => {
                   } = trip;
                   return (
                     <tr
-                      key={_id}
+                      key={id}
                       className="bg-white border-b dark:bg-gray-800/60 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                     >
                       <td className="px-3 py-2">{index + 1}</td>
@@ -184,13 +184,13 @@ const TransesList = () => {
                       <td className="px-3 py-2">{costPerTrip}</td>
 
                       <td className="px-6 py-4 flex space-x-3">
-                        <Link to={`/admin/transes/trip-info/${_id}`}>
+                        <Link to={`/admin/transes/trip-info/${id}`}>
                           <AiOutlineEye
                             size={20}
                             className="text-purple-600 hover:text-purple-800"
                           />
                         </Link>
-                        <Link to={`/admin/trans/edit/${_id}`}>
+                        <Link to={`/admin/trans/edit/${id}`}>
                           <FaEdit
                             size={20}
                             className="text-green-600 hover:text-green-800"
@@ -198,7 +198,7 @@ const TransesList = () => {
                         </Link>
                         <button
                           onClick={() => {
-                            confirmDelete(_id);
+                            confirmDelete(id);
                           }}
                         >
                           <FaTrashAlt

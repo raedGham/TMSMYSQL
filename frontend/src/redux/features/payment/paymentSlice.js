@@ -175,7 +175,7 @@ const paymentSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.payments = state.payments.filter(
-          (payment) => payment._id !== action.payload._id
+          (payment) => payment.id !== action.payload.id
         );
         toast.success("Payment Deleted Sucessfully");
       })

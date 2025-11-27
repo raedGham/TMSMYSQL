@@ -42,7 +42,7 @@ const EditTrip = () => {
         setPreview(trip.thumbnail?.url || null); // Show existing image
 
         // Only set organizer after trip loads
-        setOrganizerID(trip.organizerID?._id || trip.organizerID || "");
+        setOrganizerID(trip.organizerID?.id || trip.organizerID || "");
       } catch (err) {
         toast.error("Failed to load trip details");
       }

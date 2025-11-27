@@ -50,7 +50,7 @@ function PaymentsList() {
                 <tbody>
                   {payments?.map((payment, index) => {
                     const {
-                      _id,
+                      id,
                       reservationID,
                       paymentDate,
                       amount,
@@ -66,7 +66,7 @@ function PaymentsList() {
 
                     return (
                       <tr
-                        key={_id}
+                        key={id}
                         className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                       >
                         <td className="px-3 py-2">{index + 1}</td>

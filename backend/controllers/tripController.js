@@ -11,6 +11,7 @@ const fs = require("fs");
 // NEW TRIP
 // --------------------------------------------------------------------
 const newTrip = asyncHandler(async (req, res) => {
+  try {
   const {
     title,
     destination,
@@ -20,8 +21,9 @@ const newTrip = asyncHandler(async (req, res) => {
     pricePerPerson,
     organizerID,
   } = req.body;
+ console.log(organizerID);
 
-  if (!title || !destination || !demographic || !startDate || !endDate) {
+  if (!title || !destination || !demographic || !startDate || !endDate || !req.file) {
     return res.status(400).json({ message: "Please fill all required fields" });
   }
 
@@ -33,10 +35,18 @@ const newTrip = asyncHandler(async (req, res) => {
     endDate,
     pricePerPerson,
     organizerID,
-    thumbnail: path.join("uploads", "thumbs", req.file.filename),
+    thumbnail:path.join("uploads", "thumbs", req.file.filename), 
   });
 
   res.status(201).json(trip);
+} catch (error) {
+    console.error('Error creating trip:', error);
+    res.status(500).json({ 
+      message: 'Error creating trip', 
+      error: error.message 
+    });
+  }
+
 });
 
 // --------------------------------------------------------------------

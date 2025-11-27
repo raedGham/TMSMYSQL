@@ -42,8 +42,8 @@ function Destination() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {trips.map((trip) => (
           <Link
-            to={`/details/${trip._id}`} // 👈 navigate to TripDetails page
-            key={trip._id}
+            to={`/details/${trip.id}`} // 👈 navigate to TripDetails page
+            key={trip.id}
             className="relative group rounded-2xl overflow-hidden shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
           >
             {/* Trip Image */}

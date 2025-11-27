@@ -5,14 +5,20 @@ const { User } = require("../models"); // Sequelize User model
 const protect = asyncHandler(async (req, res, next) => {
   try {
     const token = req.cookies.token;
+    console.log("COOKIES RECEIVED:", token);
+
     if (!token) {
       res.status(401);
       throw new Error("Not authorized, please login");
     }
 
-    // verify token
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
-
+    try {
+      const verified = jwt.verify(req.cookies.token, process.env.JWT_SECRET);
+      console.log("Verified:", verified);
+    } catch (err) {
+      console.log("JWT ERROR:", err.message);
+    }
+    console.log("-----------------------------");
     // get user id from token
     const user = await User.findByPk(verified.id, {
       attributes: { exclude: ["password"] },

@@ -19,7 +19,7 @@ function PaymentsList() {
 
   const { payments } = useSelector((state) => state.payment);
   const userPayments = payments.filter(
-    (r) => r.reservationID.userID?._id === currUserID
+    (r) => r.reservationID.userID?.id === currUserID
   );
 
   console.log(payments);

@@ -180,7 +180,7 @@ const complaintSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.complaints = state.complaints.filter(
-          (complaint) => complaint._id !== action.payload._id
+          (complaint) => complaint.id !== action.payload.id
         );
         toast.success("Complaint Deleted Sucessfully");
       })

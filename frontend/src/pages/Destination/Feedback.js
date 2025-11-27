@@ -51,7 +51,7 @@ function Feedback({ tripID, userID }) {
         )}
 
         {reviews.map((review) => (
-          <div key={review._id} className="border-b border-gray-700 pb-4">
+          <div key={review.id} className="border-b border-gray-700 pb-4">
             {/* Stars */}
             <div className="flex">
               {[1, 2, 3, 4, 5].map((i) => (

@@ -29,7 +29,7 @@ function TripDetails() {
   const tripTranses = transes.filter((t) => t.tripID === id);
 
   const { activities } = useSelector((state) => state.activity);
-  const tripActivities = activities.filter((t) => t.tripID === trip._id);
+  const tripActivities = activities.filter((t) => t.tripID === trip.id);
 
   useEffect(() => {
     dispatch(getTrip(id));
@@ -110,7 +110,7 @@ function TripDetails() {
           </div>
           <div className="mt-10">
             <Link
-              to={`/trip/images/${trip._id}`}
+              to={`/trip/images/${trip.id}`}
               className="mt-12 px-4 py-2 bg-[#701414] text-white font-normal rounded-lg dark:hover:bg-[#9c4343] activityition duration-200 shadow"
             >
               view Images
@@ -137,7 +137,7 @@ function TripDetails() {
         <>
           <div>
             <Link
-              to={reserved ? "#" : `/reservation/${trip._id}`}
+              to={reserved ? "#" : `/reservation/${trip.id}`}
               onClick={(e) => reserved && e.preventDefault()}
               className={`mt-1 ml-12 px-4 py-2 text-white font-normal rounded-lg shadow transition duration-200
               ${
@@ -150,7 +150,7 @@ function TripDetails() {
               {reserved ? "Already Reserved" : "Reserve Trip"}
             </Link>
           </div>
-          <Feedback tripID={trip._id} userID={userID} />
+          <Feedback tripID={trip.id} userID={userID} />
         </>
       )}
     </div>

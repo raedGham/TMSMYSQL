@@ -50,7 +50,7 @@ const AddReservation = () => {
       reservationDate:new Date().toISOString().split("T")[0], 
       numberOfPeople: Number(numberOfPeople),
       status: "active",
-      tripID: trip._id,
+      tripID: trip.id,
       userID,
     };
     console.log("ReservData:", ReservData);

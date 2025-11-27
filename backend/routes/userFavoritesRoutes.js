@@ -11,10 +11,10 @@ const {
   updateFavorite,
 } = require("../controllers/userFavoritesController");
 
-router.post("/new", protect, newFavorite);
+router.post("/new", newFavorite);
 router.get("/", getFavorites);
 router.get("/:id", getFavorite);
-router.delete("/:id", protect, deleteFavorite);
-router.patch("/:id", protect, upload.none(), updateFavorite);
+router.delete("/:id", deleteFavorite);
+router.patch("/:id",  upload.none(), updateFavorite);
 
 module.exports = router;

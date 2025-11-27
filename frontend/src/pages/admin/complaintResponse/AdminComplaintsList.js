@@ -72,7 +72,7 @@ function ComplaintsList() {
             <tbody>
               {filteredComplaints.map((complaint, index) => {
                 const {
-                  _id,
+                  id,
                   userID,
                   category,
                   status,
@@ -86,7 +86,7 @@ function ComplaintsList() {
                   <>
                     {/* Row 1: regular fields */}
                     <tr
-                      key={`${_id}-main`}
+                      key={`${id}-main`}
                       className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                     >
                       <td className="px-3 py-2">{index + 1}</td>
@@ -101,7 +101,7 @@ function ComplaintsList() {
                       </td>
                       <td className="px-6 py-4 flex space-x-3">
                         <Link
-                          to={`/admin/complaints/respond/${_id}`}
+                          to={`/admin/complaints/respond/${id}`}
                           className="mt-1 ml-12 px-12 py-2   bg-[#701414] text-white font-normal rounded-lg dark:hover:bg-[#9c4343] transition duration-200 shadow"
                         >
                           Respond
@@ -111,7 +111,7 @@ function ComplaintsList() {
 
                     {/* Row 2: complaint text full width */}
                     <tr
-                      key={`${_id}-complaint`}
+                      key={`${id}-complaint`}
                       className="bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-700"
                     >
                       <td
@@ -126,7 +126,7 @@ function ComplaintsList() {
 
                     {/* Row 3: response text */}
                     <tr
-                      key={`${_id}-complaint`}
+                      key={`${id}-complaint`}
                       className="bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-700"
                     >
                       <td

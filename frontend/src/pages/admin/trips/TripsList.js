@@ -150,7 +150,7 @@ const TripsList = () => {
             <tbody>
               {currentItems.map((trip, index) => {
                 const {
-                  _id,
+                  id,
                   title,
                   destination,
                   demographic,
@@ -161,7 +161,7 @@ const TripsList = () => {
                 } = trip;
                 return (
                   <tr
-                    key={_id}
+                    key={id}
                     className="bg-white border-b dark:bg-gray-800/60 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                   >
                     <td className="px-3 py-2">{index + 1}</td>
@@ -179,26 +179,26 @@ const TripsList = () => {
                     <td className="px-3 py-2">{organizerID.name}</td>
 
                     <td className="px-6 py-4 flex space-x-3">
-                      <Link to={`/admin/activity/${_id}`}>
+                      <Link to={`/admin/activity/${id}`}>
                         <FaUmbrellaBeach
                           size={20}
                           className="text-yellow-600 hover:text-yellow-800"
                         />
                       </Link>
 
-                      <Link to={`/admin/trans/${_id}`}>
+                      <Link to={`/admin/trans/${id}`}>
                         <FaBusAlt
                           size={20}
                           className="text-blue-600 hover:text-blue-800"
                         />
                       </Link>
-                      <Link to={`/admin/trips/trip-info/${_id}`}>
+                      <Link to={`/admin/trips/trip-info/${id}`}>
                         <AiOutlinePicture
                           size={20}
                           className="text-purple-600 hover:text-purple-800"
                         />
                       </Link>
-                      <Link to={`/admin/trips/${_id}`}>
+                      <Link to={`/admin/trips/${id}`}>
                         <FaEdit
                           size={20}
                           className="text-green-600 hover:text-green-800"
@@ -206,7 +206,7 @@ const TripsList = () => {
                       </Link>
                       <button
                         onClick={() => {
-                          confirmDelete(_id);
+                          confirmDelete(id);
                         }}
                       >
                         <FaTrashAlt

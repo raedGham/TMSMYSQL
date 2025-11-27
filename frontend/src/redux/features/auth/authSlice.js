@@ -217,7 +217,7 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.users = state.users.filter(
-          (user) => user._id !== action.payload._id
+          (user) => user.id !== action.payload.id
         );
         toast.success("User Deleted Sucessfully");
       })

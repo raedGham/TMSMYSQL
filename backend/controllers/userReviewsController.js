@@ -32,7 +32,7 @@ exports.getReviewsByTrip = asyncHandler(async (req, res) => {
       where: { tripID: req.params.tripID },
       include: [
         {
-          model: User,
+          model: User, as: "user",
           attributes: ["id", "name", "email"],
         },
       ],

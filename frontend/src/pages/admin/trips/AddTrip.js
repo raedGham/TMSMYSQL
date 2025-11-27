@@ -80,6 +80,7 @@ const AddTrip = () => {
       organizerID,
       thumbnail,
     };
+    console.log("@@@@@@@@@@@@@@@@@@@@@@");
     console.log(tripData);
 
     setIsLoading(true);

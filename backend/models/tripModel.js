@@ -51,7 +51,7 @@ const Trip = sequelize.define(
 
     thumbnail: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {

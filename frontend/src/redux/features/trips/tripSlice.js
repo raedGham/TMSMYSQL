@@ -181,7 +181,7 @@ const tripSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.trips = state.trips.filter(
-          (trip) => trip._id !== action.payload._id
+          (trip) => trip.id !== action.payload.id
         );
         toast.success("Trip Deleted Sucessfully");
       })

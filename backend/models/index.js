@@ -7,6 +7,8 @@ const Token = require("./tokenModel");
 const Reservation = require("./reservationModel");
 const Payment = require("./paymentModel");
 const Activity = require("./activitiesModel");
+const Review = require("./userReviewsModel");
+
 
 // Main user who filed the complaint
 Complaint.belongsTo(User, { foreignKey: "userID", as: "complainant" });
@@ -34,15 +36,22 @@ Trip.hasMany(Transportation, { foreignKey: "tripID", as: "transportations" });
 Token.belongsTo(User, { foreignKey: "userId" });
 User.hasMany(Token, { foreignKey: "userId", as: "tokens" });
 
-Reservation.belongsTo(Trip, { foreignKey: "tripID" });
+Reservation.belongsTo(Trip, { foreignKey: "tripID", as : "trip" });
 Trip.hasMany(Reservation, { foreignKey: "tripID", as: "reservations" });
 
-Reservation.belongsTo(User, { foreignKey: "userID" });
+Reservation.belongsTo(User, { foreignKey: "userID", as: "user" });
 User.hasMany(Reservation, { foreignKey: "userID", as: "reservations" });
 
-Payment.belongsTo(Reservation, { foreignKey: "reservationID" });
+Payment.belongsTo(Reservation, { foreignKey: "reservationID" , as : "reservation"});
 Reservation.hasMany(Payment, { foreignKey: "reservationID", as: "payments" });
 
 
-Activity.belongsTo(Trip, { foreignKey: "tripID" });
+Activity.belongsTo(Trip, { foreignKey: "tripID", as : "trip" });
 Trip.hasMany(Activity, { foreignKey: "tripID", as: "activities" });
+
+Review.belongsTo(Trip, {foreignKey: "tripID", as: "trip"});
+Trip.hasMany(Review, { foreignKey: "tripID",as: "reviews"});
+
+
+Review.belongsTo(User, {foreignKey: "userID", as: "user"});
+User.hasMany(Review, { foreignKey: "userID", as: "reviews"});

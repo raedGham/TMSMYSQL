@@ -17,8 +17,8 @@ const newReservation = asyncHandler(async (req, res) => {
     reservationDate,
     numberOfPeople,
     status,
-    tripId: tripID,
-    userId: userID,
+    tripID: tripID,
+    userID: userID,
   });
 
   res.status(201).json(reservation);

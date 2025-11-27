@@ -182,7 +182,7 @@ const reservationSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.reserves = state.reserves.filter(
-          (reserv) => reserv._id !== action.payload._id
+          (reserv) => reserv.id !== action.payload.id
         );
         toast.success("Reserv Deleted Sucessfully");
       })

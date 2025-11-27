@@ -11,10 +11,10 @@ const {
   updateComplaint,
 } = require("../controllers/userComplaintsController");
 
-router.post("/new", protect, upload.none(), newComplaint);
+router.post("/new", upload.none(), newComplaint);
 router.get("/", getComplaints);
 router.get("/:id", getComplaint);
-router.delete("/:id", protect, deleteComplaint);
-router.patch("/:id", protect, upload.none(), updateComplaint);
+router.delete("/:id", deleteComplaint);
+router.patch("/:id", upload.none(), updateComplaint);
 
 module.exports = router;

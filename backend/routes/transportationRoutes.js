@@ -11,10 +11,10 @@ const {
   updateTransportation,
 } = require("../controllers/transportationController");
 
-router.post("/new", protect, upload.none(), newTransportation);
+router.post("/new", upload.none(), newTransportation);
 router.get("/", getTransportations);
 router.get("/:id", getTransportation);
-router.delete("/:id", protect, deleteTransportation);
-router.patch("/:id", protect, upload.none(), updateTransportation);
+router.delete("/:id",deleteTransportation);
+router.patch("/:id",upload.none(), updateTransportation);
 
 module.exports = router;

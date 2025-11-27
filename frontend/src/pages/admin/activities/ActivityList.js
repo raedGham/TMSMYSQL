@@ -152,7 +152,7 @@ const ActivitiesList = () => {
               <tbody>
                 {currentItems.map((activity, index) => {
                   const {
-                    _id,
+                    id,
                     name,
                     description,
                     startDate,
@@ -162,7 +162,7 @@ const ActivitiesList = () => {
                   } = activity;
                   return (
                     <tr
-                      key={_id}
+                      key={id}
                       className="bg-white border-b dark:bg-gray-800/60 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                     >
                       <td className="px-3 py-2">{index + 1}</td>
@@ -178,7 +178,7 @@ const ActivitiesList = () => {
                       <td className="px-3 py-2">{costPerPerson}</td>
 
                       <td className="px-6 py-4 flex space-x-3">
-                        <Link to={`/admin/activity/edit/${_id}`}>
+                        <Link to={`/admin/activity/edit/${id}`}>
                           <FaEdit
                             size={20}
                             className="text-green-600 hover:text-green-800"
@@ -186,7 +186,7 @@ const ActivitiesList = () => {
                         </Link>
                         <button
                           onClick={() => {
-                            confirmDelete(_id);
+                            confirmDelete(id);
                           }}
                         >
                           <FaTrashAlt

@@ -11,10 +11,10 @@ const {
   updateActivity,
 } = require("../controllers/activitiesController");
 
-router.post("/new", protect, upload.none(), newActivity);
+router.post("/new", upload.none(), newActivity);
 router.get("/", getActivities);
 router.get("/:id", getActivity);
-router.delete("/:id", protect, deleteActivity);
-router.patch("/:id", protect, upload.none(), updateActivity);
+router.delete("/:id",  deleteActivity);
+router.patch("/:id", upload.none(), updateActivity);
 
 module.exports = router;

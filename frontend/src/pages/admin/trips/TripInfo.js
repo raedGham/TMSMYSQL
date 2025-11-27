@@ -80,7 +80,7 @@ const TripInfo = () => {
 
           {images.map((img) => (
             <div
-              key={img._id}
+              key={img.id}
               className="border rounded shadow-sm p-2 bg-white relative"
             >
               <img
@@ -90,7 +90,7 @@ const TripInfo = () => {
               />
 
               <button
-                onClick={() => handleDelete(img._id)}
+                onClick={() => handleDelete(img.id)}
                 className="text-xs text-red-600 absolute top-1 right-1 bg-white px-1 rounded"
               >
                 ✕

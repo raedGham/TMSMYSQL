@@ -180,7 +180,7 @@ const activitySlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.activities = state.activities.filter(
-          (activity) => activity._id !== action.payload._id
+          (activity) => activity.id !== action.payload.id
         );
         toast.success("Activity Deleted Sucessfully");
       })

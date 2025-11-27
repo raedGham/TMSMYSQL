@@ -170,7 +170,7 @@ function TripForm({
                 >
                   <option value="">-- Select an Organizer --</option>
                   {users.map((user) => (
-                    <option key={user._id} value={user._id}>
+                    <option key={user.id} value={user.id}>
                       {user.name}
                     </option>
                   ))}

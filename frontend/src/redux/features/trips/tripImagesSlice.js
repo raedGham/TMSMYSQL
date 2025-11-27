@@ -104,7 +104,7 @@ const tripImagesSlice = createSlice({
       })
       .addCase(removeTripImage.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.images = state.images.filter((img) => img._id !== action.payload);
+        state.images = state.images.filter((img) => img.id !== action.payload);
         toast.success("Image Deleted");
       })
       .addCase(removeTripImage.rejected, (state, action) => {

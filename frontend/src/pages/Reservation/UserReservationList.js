@@ -18,7 +18,7 @@ function UserReservationList() {
   }, [dispatch]);
 
   const { reserves } = useSelector((state) => state.reservation);
-  const userReserves = reserves.filter((r) => r.userID._id === userID);
+  const userReserves = reserves.filter((r) => r.userID.id === userID);
 
   return (
     <div className="">

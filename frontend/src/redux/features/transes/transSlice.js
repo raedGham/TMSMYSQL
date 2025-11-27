@@ -180,7 +180,7 @@ const transSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.transes = state.transes.filter(
-          (trans) => trans._id !== action.payload._id
+          (trans) => trans.id !== action.payload.id
         );
         toast.success("Trans Deleted Sucessfully");
       })

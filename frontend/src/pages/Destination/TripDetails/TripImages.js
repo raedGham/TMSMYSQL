@@ -40,7 +40,7 @@ function TripImages() {
           >
             {images.map((img) => (
               <img
-                key={img._id}
+                key={img.id}
                 src={`${BACKEND_URL}/${img.path}`}
                 alt="Trip"
                 className="w-full flex-shrink-0 object-cover h-[600PX]"

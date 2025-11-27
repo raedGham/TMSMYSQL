@@ -39,8 +39,8 @@ const registerUser = asyncHandler(async (req, res) => {
     path: "/",
     httpOnly: true,
     expires: new Date(Date.now() + 1000 * 86400),
-    sameSite: "none",
-    secure: true,
+    sameSite: "lax",
+    secure: false,
   });
 
   res.status(201).json({

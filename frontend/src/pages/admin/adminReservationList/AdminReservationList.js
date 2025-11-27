@@ -52,7 +52,7 @@ function AdminReservationList() {
                 <tbody>
                   {reserves.map((Reserv, index) => {
                     const {
-                      _id,
+                      id,
                       userID,
                       tripID,
                       numberOfPeople,
@@ -62,7 +62,7 @@ function AdminReservationList() {
 
                     return (
                       <tr
-                        key={_id}
+                        key={id}
                         className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                       >
                         <td className="px-3 py-2">{index + 1}</td>

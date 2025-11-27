@@ -47,7 +47,7 @@ const AddResponse = () => {
   useEffect(() => {
     if (complaint) {
       setFormData({
-        userID: complaint.userID._id,
+        userID: complaint.userID.id,
         status: complaint.status || "",
         category: complaint.category || "",
         dateFiled: complaint.dateFiled ? complaint.dateFiled.split("T")[0] : "",

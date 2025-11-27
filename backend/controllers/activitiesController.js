@@ -19,7 +19,7 @@ const newActivity = asyncHandler(async (req, res) => {
   if (!name || !description || !startDate || !finishDate || !capacity || !tripID || !costPerPerson) {
     return res.status(400).json({ message: "Please fill all required fields" });
   }
-
+console.log("----------------tripID", tripID)
   const activity = await Activity.create({
     name,
     description,
@@ -27,7 +27,7 @@ const newActivity = asyncHandler(async (req, res) => {
     finishDate,
     capacity,
     costPerPerson,
-    tripId: tripID,
+    tripID: tripID,
   });
 
   res.status(201).json(activity);

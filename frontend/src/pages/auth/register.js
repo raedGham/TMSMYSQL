@@ -63,7 +63,7 @@ function Register() {
       await dispatch(SET_LOGIN(true));
       await dispatch(SET_NAME(data.name));
       await dispatch(SET_EMAIL(data.email));
-      await dispatch(SET_ID(data._id));
+      await dispatch(SET_ID(data.id));
       await dispatch(SET_TYPE(data.type));
       navigate("/main");
       setIsLoading(false);
