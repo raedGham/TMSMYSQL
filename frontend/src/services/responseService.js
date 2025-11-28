@@ -39,9 +39,8 @@ export const registerResponse = async (id, responseData) => {
     formData.append("responseText", responseData.responseText);
     formData.append("dateReviewed", responseData.dateReviewed);
     console.log(responseData.dateReviewed);
-    console.log("id:", id);
 
-    console.log(`${API_URL}/${id}`);
+
     const response = await axios.patch(`${API_URL}/${id}`, formData, {
       withCredentials: true,
     });

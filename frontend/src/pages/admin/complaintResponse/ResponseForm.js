@@ -8,7 +8,7 @@ function ResponseForm({
   responseText,
   handleInputChange,
   addRes,
-  formTitle,
+  formTitle,  
 }) {
   const namewithquotes = localStorage.getItem("name");
   const name = namewithquotes.replace(/"/g, "");
@@ -45,7 +45,7 @@ function ResponseForm({
                       Complaint User:
                     </span>
                     <span className="ml-2 text-gray-300">
-                      {complaint.userID?.name}
+                      {complaint.complainant.name}
                     </span>
                   </p>
 
@@ -54,7 +54,7 @@ function ResponseForm({
                       Email:
                     </span>
                     <span className="ml-2 text-gray-300">
-                      {complaint.userID?.email}
+                      {complaint.complainant.email}
                     </span>
                   </p>
 

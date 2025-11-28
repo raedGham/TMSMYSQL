@@ -33,12 +33,7 @@ const getComplaints = asyncHandler(async (req, res) => {
         model: User,
         as: "complainant", // alias for the user who filed the complaint
         attributes: ["id", "name", "email"],
-      },
-      {
-        model: User,
-        as: "supervisor", // alias for the supervisor reviewing the complaint
-        attributes: ["id", "name", "email"],
-      },
+      },          
     ],
   });
 
@@ -49,7 +44,7 @@ const getComplaints = asyncHandler(async (req, res) => {
 // --------------------------------------------------------------------
 const getComplaint = asyncHandler(async (req, res) => {
   const complaint = await Complaint.findByPk(req.params.id, {
-    include: [{ model: User, attributes: ["id", "name", "email"] }],
+    include: [{ model: User, as: "complainant",  attributes: ["id", "name", "email"] }],
   });
 
   if (!complaint) {
@@ -63,7 +58,7 @@ const getComplaint = asyncHandler(async (req, res) => {
 // UPDATE COMPLAINT
 // --------------------------------------------------------------------
 const updateComplaint = asyncHandler(async (req, res) => {
-  const { supervisorID, status, dateReviewed, complaintText } = req.body;
+  const { supervisorID, status, dateReviewed, complaintText, responseText} = req.body;
 
   const complaint = await Complaint.findByPk(req.params.id);
 
@@ -75,6 +70,7 @@ const updateComplaint = asyncHandler(async (req, res) => {
   complaint.status = status ?? complaint.status;
   complaint.dateReviewed = dateReviewed ?? complaint.dateReviewed;
   complaint.complaintText = complaintText ?? complaint.complaintText;
+  complaint.responseText = responseText ?? complaint.responseText;
 
   await complaint.save();
 

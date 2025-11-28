@@ -23,7 +23,8 @@ function UserReservationList() {
   const userReserves = reserves.filter(
     (r) => String(r.userID) === String(userID)
   );
-
+  console.log("----------")
+  console.log(reserves)
   return (
     <div className="">
       {isLoggedIn ? (

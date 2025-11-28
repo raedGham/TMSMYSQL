@@ -1,13 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { selectIsLoggedIn } from "../../../redux/features/auth/authSlice";
-
 import { fetchPayments } from "../../../redux/features/payment/paymentSlice";
 
 function PaymentsList() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // change as needed
 
   useEffect(() => {
     dispatch(fetchPayments());
@@ -15,7 +17,73 @@ function PaymentsList() {
 
   const { payments } = useSelector((state) => state.payment);
 
-  console.log(payments);
+  // --------------------------
+  // Pagination Logic
+  // --------------------------
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = payments?.slice(indexOfFirstItem, indexOfLastItem) || [];
+  const totalPages = payments ? Math.ceil(payments.length / itemsPerPage) : 1;
+
+  // --------------------------
+  // Pagination Buttons
+  // --------------------------
+  const Pagination = () => {
+    const pages = [];
+    for (let i = 1; i <= totalPages; i++) pages.push(i);
+
+    return (
+      <div className="flex items-center justify-center space-x-1 mt-4">
+        {/* Previous */}
+        <button
+          onClick={() => setCurrentPage(currentPage - 1)}
+          disabled={currentPage === 1}
+          className={`
+            px-3 py-1 rounded-md text-sm font-medium border
+            ${currentPage === 1
+              ? "bg-gray-200 border-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-white border-gray-300 text-gray-700 hover:bg-gray-100"
+            }`}
+        >
+          Prev
+        </button>
+
+        {/* Page Numbers */}
+        {pages.map((page) => (
+          <button
+            key={page}
+            onClick={() => setCurrentPage(page)}
+            className={`
+              px-3 py-1 rounded-md text-sm font-medium border
+              ${currentPage === page
+                ? "bg-indigo-600 border-indigo-600 text-white"
+                : "bg-white border-gray-300 text-gray-700 hover:bg-gray-100"
+              }`}
+          >
+            {page}
+          </button>
+        ))}
+
+        {/* Next */}
+        <button
+          onClick={() => setCurrentPage(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className={`
+            px-3 py-1 rounded-md text-sm font-medium border
+            ${currentPage === totalPages
+              ? "bg-gray-200 border-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-white border-gray-300 text-gray-700 hover:bg-gray-100"
+            }`}
+        >
+          Next
+        </button>
+      </div>
+    );
+  };
+
+  // --------------------------
+  // Render
+  // --------------------------
   return (
     <div>
       {isLoggedIn ? (
@@ -34,52 +102,55 @@ function PaymentsList() {
                 -- You didn't pay anything yet ....
               </p>
             ) : (
-              <table className="min-w-full text-sm text-left text-gray-500 dark:text-gray-200 mt-2">
-                <thead className="text-[11px] uppercase bg-gray-50 dark:bg-gray-900 dark:text-gray-200">
-                  <tr>
-                    <th className="px-6 py-3">S/N</th>
-                    <th className="px-6 py-3">User Name</th>
-                    <th className="px-6 py-3">Trip Title</th>
-                    <th className="px-6 py-3">Reservation Date</th>
-                    <th className="px-6 py-3">Payment Date</th>
-                    <th className="px-6 py-3">Amount Paid</th>
-                    <th className="px-6 py-3">Payment Method</th>
-                  </tr>
-                </thead>
+              <>
+                <table className="min-w-full text-sm text-left text-gray-500 dark:text-gray-200 mt-2">
+                  <thead className="text-[11px] uppercase bg-gray-50 dark:bg-gray-900 dark:text-gray-200">
+                    <tr>
+                      <th className="px-6 py-3">S/N</th>
+                      <th className="px-6 py-3">User Name</th>
+                      <th className="px-6 py-3">Trip Title</th>
+                      <th className="px-6 py-3">Reservation Date</th>
+                      <th className="px-6 py-3">Payment Date</th>
+                      <th className="px-6 py-3">Amount Paid</th>
+                      <th className="px-6 py-3">Payment Method</th>
+                    </tr>
+                  </thead>
 
-                <tbody>
-                  {payments?.map((payment, index) => {
-                    const {
-                      id,
-                      reservation,
-                      paymentDate,
-                      amount,
-                      paymentMethod,
-                    } = payment;
+                  <tbody>
+                    {currentItems.map((payment, index) => {
+                      const {
+                        id,
+                        reservation,
+                        paymentDate,
+                        amount,
+                        paymentMethod,
+                      } = payment;
 
-                    return (
-                      <tr
-                        key={id}
-                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
-                      >
-                        <td className="px-3 py-2">{index + 1}</td>
-                        <td className="px-3 py-2">{reservation.user.name}</td>
-                        <td className="px-3 py-2">{reservation.trip.title}</td>
-                        <td className="px-3 py-2">
-                          {new Date(
-                            reservation.reservationDate
-                          ).toLocaleDateString("en-GB")}
-                        </td>
-                        <td className="px-3 py-2">
-                          {new Date(paymentDate).toLocaleDateString("en-GB")}
-                        </td>
-                        <td className="px-3 py-2">{amount}</td>
-                        <td className="px-3 py-2">{paymentMethod}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                      return (
+                        <tr
+                          key={id}
+                          className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
+                        >
+                          <td className="px-3 py-2">{indexOfFirstItem + index + 1}</td>
+                          <td className="px-3 py-2">{reservation.user.name}</td>
+                          <td className="px-3 py-2">{reservation.trip.title}</td>
+                          <td className="px-3 py-2">
+                            {new Date(reservation.reservationDate).toLocaleDateString("en-GB")}
+                          </td>
+                          <td className="px-3 py-2">
+                            {new Date(paymentDate).toLocaleDateString("en-GB")}
+                          </td>
+                          <td className="px-3 py-2">{amount}</td>
+                          <td className="px-3 py-2">{paymentMethod}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+
+                {/* Pagination */}
+                <Pagination />
+              </>
             )}
           </div>
         </div>
@@ -93,3 +164,4 @@ function PaymentsList() {
 }
 
 export default PaymentsList;
+

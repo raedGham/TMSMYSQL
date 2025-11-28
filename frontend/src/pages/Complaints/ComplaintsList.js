@@ -25,7 +25,7 @@ function ComplaintsList() {
   console.log(userID);
 
   const userComplaints = complaints.filter(
-    (complaint) => complaint.userID?.id.toString() === userID?.toString()
+    (complaint) => complaint.userID.toString() === userID.toString()
   );
   console.log(userID);
   console.log("userComplaints:", userComplaints);
@@ -122,7 +122,7 @@ function ComplaintsList() {
             <tbody>
               {userComplaints.map((complaint, index) => {
                 const {
-                  _id,
+                  id,
                   category,
                   status,
                   complaintText,
@@ -135,7 +135,7 @@ function ComplaintsList() {
                   <>
                     {/* Row 1: regular fields */}
                     <tr
-                      key={`${_id}-main`}
+                      key={`${id}-main`}
                       className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                     >
                       <td className="px-3 py-2">{index + 1}</td>
@@ -149,13 +149,13 @@ function ComplaintsList() {
                         {new Date(dateReviewed).toLocaleDateString("en-GB")}
                       </td>
                       <td className="px-6 py-4 flex space-x-3">
-                        <Link to={`/complaint/${_id}`}>
+                        <Link to={`/complaint/${id}`}>
                           <FaEdit
                             size={20}
                             className="text-green-600 hover:text-green-800"
                           />
                         </Link>
-                        <button onClick={() => confirmDelete(_id)}>
+                        <button onClick={() => confirmDelete(id)}>
                           <FaTrashAlt
                             size={18}
                             className="text-red-600 hover:text-red-800"
@@ -166,7 +166,7 @@ function ComplaintsList() {
 
                     {/* Row 2: complaint text full width */}
                     <tr
-                      key={`${_id}-complaint`}
+                      key={`${id}-complaint`}
                       className="bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-700"
                     >
                       <td
@@ -181,7 +181,7 @@ function ComplaintsList() {
 
                     {/* Row 3: response */}
                     <tr
-                      key={`${_id}-complaint1`}
+                      key={`${id}-complaint1`}
                       className="bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-700"
                     >
                       <td

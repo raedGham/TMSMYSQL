@@ -83,7 +83,6 @@ const AddResponse = () => {
       dateReviewed,     
     };
 
-    console.log("ResponseData:", responseData);
 
     setIsResponseLoading(true);
 
@@ -101,6 +100,8 @@ const AddResponse = () => {
   // --------------------------
   // DISPLAY
   // --------------------------
+  console.log("-----------------")
+  console.log(complaint)
   return (
     <ResponseForm
       complaint={complaint}    

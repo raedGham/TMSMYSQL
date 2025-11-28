@@ -26,9 +26,12 @@ function ComplaintsList() {
   useEffect(() => {
     dispatch(FILTER_COMPLAINTS({ complaints, search }));
   }, [complaints, search, dispatch]);
+
+  console.log("----------------")
+  console.log(complaints)
   return (
     <div className="">
-      <div className="w-full rounded-lg shadow  p-14">
+      <div className="w-full rounded-lg shadow  p-10 mt-6 ">
         <div className="flex">
           <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white mb-2 mr-4 pt-2">
             Complaints Responses
@@ -37,7 +40,7 @@ function ComplaintsList() {
           <Search value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto mx-10">
         {!filteredComplaints && <p>Loading...</p>}
 
         {filteredComplaints.length === 0 ? (
@@ -64,7 +67,7 @@ function ComplaintsList() {
                 <th scope="col" className="px-6 py-3">
                   Date Reviewed
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-12 py-3">
                   Actions
                 </th>
               </tr>
@@ -73,7 +76,7 @@ function ComplaintsList() {
               {filteredComplaints.map((complaint, index) => {
                 const {
                   id,
-                  userID,
+                  complainant,
                   category,
                   status,
                   complaintText,
@@ -81,7 +84,7 @@ function ComplaintsList() {
                   dateReviewed,
                   responseText,
                 } = complaint;
-
+                       
                 return (
                   <>
                     {/* Row 1: regular fields */}
@@ -90,7 +93,7 @@ function ComplaintsList() {
                       className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                     >
                       <td className="px-3 py-2">{index + 1}</td>
-                      <td className="px-3 py-2">{userID.name}</td>
+                      <td className="px-3 py-2">{complainant.name}</td>
                       <td className="px-3 py-2">{category}</td>
                       <td className="px-3 py-2">{status}</td>
                       <td className="px-3 py-2">
@@ -104,7 +107,7 @@ function ComplaintsList() {
                           to={`/admin/complaints/respond/${id}`}
                           className="mt-1 ml-12 px-12 py-2   bg-[#701414] text-white font-normal rounded-lg dark:hover:bg-[#9c4343] transition duration-200 shadow"
                         >
-                          Respond
+                          { status !="Replied" ? "Respond" : "Edit Response"}
                         </Link>
                       </td>
                     </tr>
@@ -116,9 +119,9 @@ function ComplaintsList() {
                     >
                       <td
                         colSpan={5}
-                        className="px-6 py-3 text-gray-700 dark:text-gray-300 italic"
+                        className="px-6 py-3 text-gray-700 dark:text-gray-300"
                       >
-                        <p1> Complaint</p1>
+                        <p className="text-lg text-gray-700 dark:text-indigo-500"> User Complaint</p>
                         <br />
                         {complaintText}
                       </td>
@@ -126,14 +129,14 @@ function ComplaintsList() {
 
                     {/* Row 3: response text */}
                     <tr
-                      key={`${id}-complaint`}
+                      key={`${id}-response`}
                       className="bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-700"
                     >
                       <td
                         colSpan={5}
-                        className="px-6 py-3 text-gray-700 dark:text-gray-300 italic"
+                        className="px-6 py-3 text-gray-700 dark:text-gray-300"
                       >
-                        <p1> Supervisor Response</p1>
+                        <p className="text-lg text-gray-700 dark:text-indigo-500"> Supervisor Response</p>
                         <br />
                         {responseText}
                       </td>
