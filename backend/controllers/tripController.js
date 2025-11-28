@@ -20,6 +20,7 @@ const newTrip = asyncHandler(async (req, res) => {
       endDate,
       pricePerPerson,
       organizerID,
+      status,
     } = req.body;
     console.log(organizerID);
 
@@ -44,6 +45,7 @@ const newTrip = asyncHandler(async (req, res) => {
       endDate,
       pricePerPerson,
       organizerID,
+      status,
       thumbnail: path.join("uploads", "thumbs", req.file.filename),
     });
 
@@ -97,6 +99,7 @@ const updateTrip = asyncHandler(async (req, res) => {
     endDate,
     pricePerPerson,
     organizerID,
+    status
   } = req.body;
 
   const trip = await Trip.findByPk(req.params.id);
@@ -110,6 +113,7 @@ const updateTrip = asyncHandler(async (req, res) => {
   trip.endDate = endDate ?? trip.endDate;
   trip.pricePerPerson = pricePerPerson ?? trip.pricePerPerson;
   trip.organizerID = organizerID ?? trip.organizerID;
+  trip.status = status ?? trip.status;
 
   await trip.save();
   res.status(200).json(trip);

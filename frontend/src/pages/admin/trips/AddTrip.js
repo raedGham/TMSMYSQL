@@ -16,6 +16,7 @@ const initialState = {
   pricePerPerson: "",
   organizerID: "",
   thumbnail: "",
+  status : "active",
 };
 
 const AddTrip = () => {
@@ -30,6 +31,7 @@ const AddTrip = () => {
     pricePerPerson,
     organizerID,
     thumbnail,
+    status,
   } = formData;
 
   const [preview, setPreview] = useState(null);
@@ -79,6 +81,7 @@ const AddTrip = () => {
       pricePerPerson,
       organizerID,
       thumbnail,
+      status,
     };
     console.log("@@@@@@@@@@@@@@@@@@@@@@");
     console.log(tripData);
@@ -109,6 +112,7 @@ const AddTrip = () => {
       addTrip={addTrip}
       formTitle={"Add Trip"}
       users={users}
+      status={status}
       handleThumbnailChange={handleThumbnailChange}
       preview={preview}
     />

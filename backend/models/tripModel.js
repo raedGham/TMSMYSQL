@@ -53,6 +53,12 @@ const Trip = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+  
+    status: {
+      type: DataTypes.ENUM("active", "completed"),
+      allowNull: false,
+      defaultValue: "active",
+    },
   },
   {
     tableName: "Trips",

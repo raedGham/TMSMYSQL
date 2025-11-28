@@ -20,6 +20,8 @@ export const registerTrip = async (tripData) => {
     formData.append("endDate", tripData.endDate);
     formData.append("pricePerPerson", tripData.pricePerPerson);
     formData.append("organizerID", tripData.organizerID);
+    formData.append("status", tripData.status);
+
     if (tripData.thumbnail) formData.append("thumbnail", tripData.thumbnail);
 
      const response = await axios.post(
@@ -81,6 +83,7 @@ export const updateTrip = async (id, tripData) => {
     formData.append("endDate", tripData.endDate);
     formData.append("pricePerPerson", tripData.pricePerPerson);
     formData.append("organiserID", tripData.organiserID);
+    formData.append("status", tripData.status);
     if (tripData.thumbnail) formData.append("thumbnail", tripData.thumbnail);
     const response = await axios.patch(`${API_URL}/${id}`, formData, {
       withCredentials: true,

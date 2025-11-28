@@ -11,6 +11,8 @@ function Destination() {
     (state) => state.trip
   );
 
+  const activeTrips = trips.filter((t)=> t.status === "active")
+
   useEffect(() => {
     dispatch(fetchTrips());
   }, [dispatch]);
@@ -40,7 +42,7 @@ function Destination() {
 
       {/* Destinations Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {trips.map((trip) => (
+        {activeTrips.map((trip) => (
           <Link
             to={`/details/${trip.id}`} // 👈 navigate to TripDetails page
             key={trip.id}

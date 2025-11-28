@@ -20,6 +20,7 @@ const EditTrip = () => {
   const [organizerID, setOrganizerID] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [status, setStatus] = useState("active");
 
   const [formData, setFormData] = useState("");
 
@@ -37,6 +38,7 @@ const EditTrip = () => {
         setDemographic(trip.demographic);
         setStartDate(trip.startDate);
         setEndDate(trip.endDate);
+        setStatus(trip.status);
         setPricePerPerson(trip.pricePerPerson);
 
         setPreview(trip.thumbnail?.url || null); // Show existing image
@@ -75,6 +77,10 @@ const EditTrip = () => {
       case "organizerID":
         setOrganizerID(value);
         break;
+      case "status":
+        setStatus(value);
+      break;
+  
     }
   };
 
@@ -98,6 +104,7 @@ const EditTrip = () => {
       pricePerPerson,
       organizerID,
       thumbnail, // File or null
+      status,
     };
     try {
       await updateTrip(id, tripData);
@@ -121,6 +128,7 @@ const EditTrip = () => {
       endDate={formatDate(endDate)}
       pricePerPerson={pricePerPerson}
       organizerID={organizerID}
+      status = {status}
       handleInputChange={handleInputChange}
       addTrip={handleSubmit}
       formTitle={"Edit Trip"}

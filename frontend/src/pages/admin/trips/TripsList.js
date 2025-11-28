@@ -158,6 +158,7 @@ const TripsList = () => {
                   endDate,
                   pricePerPerson,
                   organizerID,
+                  status,
                 } = trip;
                 return (
                   <tr
@@ -177,6 +178,7 @@ const TripsList = () => {
                     </td>
                     <td className="px-3 py-2">{pricePerPerson}</td>
                     <td className="px-3 py-2">{organizerID.name}</td>
+                    <td className="px-3 py-2">{status}</td>
 
                     <td className="px-6 py-4 flex space-x-3">
                       <Link to={`/admin/activity/${id}`}>
