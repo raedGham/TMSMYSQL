@@ -69,3 +69,16 @@ Trip.hasMany(Review, {
 
 Review.belongsTo(User, { foreignKey: "userID", as: "user" });
 User.hasMany(Review, { foreignKey: "userID", as: "reviews" });
+
+module.exports = {
+  Complaint,
+  User,
+  TripImage,
+  Trip,
+  Transportation,
+  Token,
+  Reservation,
+  Payment,
+  Activity,
+  Review,
+};

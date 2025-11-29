@@ -88,6 +88,7 @@ export const getLoginStatus = async () => {
       (error.response && error.response.data && error.response.data.message) ||
       error.message ||
       error.toString();
+
     toast.error(message);
     return false;
   }
@@ -156,7 +157,7 @@ export const UpdateUser = async (id, userData) => {
 //    C H A N G E  P A S S W O R D
 //----------------------------------------------------
 export const ChangePassword = async (userData) => {
-  console.log(userData)
+  console.log(userData);
   const reponse = await axios.patch(
     `${BACKEND_URL}/api/users/changepass`,
     userData,
@@ -167,12 +168,14 @@ export const ChangePassword = async (userData) => {
   return reponse.data;
 };
 
-
-
 //----------------------------------------------------
-//    U P D A T E   U S E R   T Y PE 
+//    U P D A T E   U S E R   T Y PE
 //----------------------------------------------------
 export const updateUserType = async (id, type) => {
-  const res = await axios.patch(`${BACKEND_URL}/api/users/${id}/type`, { type }, { withCredentials: true });
+  const res = await axios.patch(
+    `${BACKEND_URL}/api/users/${id}/type`,
+    { type },
+    { withCredentials: true }
+  );
   return res.data;
 };

@@ -157,7 +157,7 @@ const TripsList = () => {
                   startDate,
                   endDate,
                   pricePerPerson,
-                  organizerID,
+                  organizer,
                   status,
                 } = trip;
                 return (
@@ -177,36 +177,43 @@ const TripsList = () => {
                       {new Date(endDate).toLocaleDateString("en-GB")}
                     </td>
                     <td className="px-3 py-2">{pricePerPerson}</td>
-                    <td className="px-3 py-2">{organizerID.name}</td>
+                    <td className="px-3 py-2">{organizer.name}</td>
                     <td className="px-3 py-2">{status}</td>
 
                     <td className="px-6 py-4 flex space-x-3">
-                      <Link to={`/admin/activity/${id}`}>
+                      <Link to={`/admin/activity/${id}`} title="Add Activities">
                         <FaUmbrellaBeach
                           size={20}
                           className="text-yellow-600 hover:text-yellow-800"
                         />
                       </Link>
 
-                      <Link to={`/admin/trans/${id}`}>
+                      <Link
+                        to={`/admin/trans/${id}`}
+                        title="Add Transportation"
+                      >
                         <FaBusAlt
                           size={20}
                           className="text-blue-600 hover:text-blue-800"
                         />
                       </Link>
-                      <Link to={`/admin/trips/trip-info/${id}`}>
+                      <Link
+                        to={`/admin/trips/trip-info/${id}`}
+                        title="Add Trip Images"
+                      >
                         <AiOutlinePicture
                           size={20}
                           className="text-purple-600 hover:text-purple-800"
                         />
                       </Link>
-                      <Link to={`/admin/trips/${id}`}>
+                      <Link to={`/admin/trips/${id}`} title="Edit Trip">
                         <FaEdit
                           size={20}
                           className="text-green-600 hover:text-green-800"
                         />
                       </Link>
                       <button
+                        title="Delete Trip"
                         onClick={() => {
                           confirmDelete(id);
                         }}

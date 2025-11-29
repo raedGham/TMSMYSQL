@@ -3,38 +3,36 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../models"); // Sequelize User model
 
 const protect = asyncHandler(async (req, res, next) => {
-  try {
-    const token = req.cookies.token;
-    console.log("COOKIES RECEIVED:", token);
+  const token = req.cookies.token;
+  console.log("COOKIES RECEIVED:", token);
 
-    if (!token) {
-      res.status(401);
-      throw new Error("Not authorized, please login");
-    }
-
-    try {
-      const verified = jwt.verify(req.cookies.token, process.env.JWT_SECRET);
-      console.log("Verified:", verified);
-    } catch (err) {
-      console.log("JWT ERROR:", err.message);
-    }
-    console.log("-----------------------------");
-    // get user id from token
-    const user = await User.findByPk(verified.id, {
-      attributes: { exclude: ["password"] },
-    });
-
-    if (!user) {
-      res.status(401);
-      throw new Error("User Not Found");
-    }
-
-    req.user = user;
-    next();
-  } catch (error) {
-    res.status(401);
-    throw new Error("User Not Found or Invalid Token");
+  // 1) No token
+  if (!token) {
+    return res.status(401).json({ message: "Not authorized, no token" });
   }
+
+  let decoded;
+  try {
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log("Verified:", decoded);
+  } catch (err) {
+    console.log("JWT ERROR:", err.message);
+    return res.status(401).json({ message: "Invalid token" });
+  }
+
+  // 2) Token valid but user doesn't exist
+  const user = await User.findByPk(decoded.id, {
+    attributes: { exclude: ["password"] },
+  });
+
+  if (!user) {
+    return res.status(401).json({ message: "User not found" });
+  }
+
+  // 3) Attach user to req object
+  req.user = user;
+
+  next();
 });
 
 module.exports = protect;

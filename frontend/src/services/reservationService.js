@@ -30,6 +30,7 @@ export const registerReserv = async (reservData) => {
       (error.response && error.response.data && error.response.data.message) ||
       error.message ||
       error.toString();
+
     toast.error(message);
   }
 };
@@ -38,7 +39,7 @@ export const registerReserv = async (reservData) => {
 //    G E T  A L L   R E S E R V A T I O N S
 //----------------------------------------------------
 const getReservs = async () => {
-  const reponse = await axios.get(API_URL);
+  const reponse = await axios.get(API_URL, { withCredentials: true });
   return reponse.data;
 };
 
@@ -46,10 +47,10 @@ const getReservs = async () => {
 //    G E T  S I N G L E   R E S E R V A T I O N
 //----------------------------------------------------
 export const getReserv = async (id) => {
-  console.log("GET SINGLE RESERV")
+  console.log("GET SINGLE RESERV");
   console.log(`${API_URL}/${id}`);
   const reponse = await axios.get(API_URL + "/" + id);
-  console.log("RESRVATION SERVICE GETRESERV:", reponse)
+  console.log("RESRVATION SERVICE GETRESERV:", reponse);
   return reponse.data;
 };
 
@@ -87,16 +88,15 @@ export const updateReserv = async (id, reservData) => {
       (error.response && error.response.data && error.response.data.message) ||
       error.message ||
       error.toString();
+
     toast.error(message);
   }
 };
-
 
 export const updateStatus = async (id, status) => {
   const res = await axios.patch(API_URL + "/status/" + id, { status });
   return res.data;
 };
-
 
 const reservService = {
   registerReserv,

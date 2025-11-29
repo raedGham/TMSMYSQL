@@ -15,16 +15,16 @@ function UserReservationList() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
+    if (!isLoggedIn) return;
     dispatch(fetchReservs());
-  }, [dispatch]);
+  }, [dispatch, isLoggedIn]);
 
   const { reserves } = useSelector((state) => state.reservation);
 
   const userReserves = reserves.filter(
     (r) => String(r.userID) === String(userID)
   );
-  console.log("----------")
-  console.log(reserves)
+
   return (
     <div className="">
       {isLoggedIn ? (

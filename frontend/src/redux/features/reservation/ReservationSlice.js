@@ -54,10 +54,10 @@ export const deleteReserv = createAsyncThunk(
 // get a single reservation
 export const getReservation = createAsyncThunk(
   "reservation/getReserv",
-  
+
   async (reservationID, thunkAPI) => {
     try {
-      console.log("THUNK CALLED with:", reservationID);  
+      console.log("THUNK CALLED with:", reservationID);
       return await reservService.getReserv(reservationID);
     } catch (error) {
       const message =

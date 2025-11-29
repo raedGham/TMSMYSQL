@@ -41,10 +41,8 @@ function TripDetails() {
   }, [dispatch, trip]);
 
   useEffect(() => {
+    if (!isLoggedIn) return; //
     const fetchStatus = async () => {
-      console.log("id", id);
-      console.log("userID", userID);
-
       const res = await axios.get(
         `${BACKEND_URL}/api/trips/check/${id}/${userID}`
       );
@@ -52,7 +50,7 @@ function TripDetails() {
     };
 
     fetchStatus();
-  }, [id, userID]);
+  }, [id, userID, isLoggedIn]);
 
   if (isLoading) {
     return (

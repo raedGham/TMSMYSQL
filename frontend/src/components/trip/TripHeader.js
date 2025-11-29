@@ -17,7 +17,7 @@ function TripHeader({ tripID }) {
     startDate,
     endDate,
     pricePerPerson,
-    organizerID,
+    organizer,
     thumbnail,
   } = trip || {}; // safe destructure
 
@@ -32,7 +32,7 @@ function TripHeader({ tripID }) {
               {/* Left 2 columns: trip info */}
               <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <p>
-                  <span className="text-gray-400">Destination:</span>{" "}
+                  <span className="text-gray-400">Destination:</span>
                   {destination}
                 </p>
                 <p>
@@ -53,7 +53,7 @@ function TripHeader({ tripID }) {
                 </p>
                 <p>
                   <span className="text-gray-400">Organizer:</span>{" "}
-                  {organizerID?.name}
+                  {organizer.name}
                 </p>
               </div>
 
