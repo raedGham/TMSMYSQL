@@ -44,7 +44,7 @@ function UserReservationList() {
               </p>
             ) : (
               <table className="min-w-full text-sm text-left text-gray-500 dark:text-gray-200 mt-2">
-                <thead className="text-[11px] uppercase bg-gray-50 dark:bg-gray-900 dark:text-gray-200">
+                <thead className="text-[11px] uppercase bg-gray-50/50 dark:bg-gray-900/60 dark:text-gray-200">
                   <tr>
                     <th className="px-6 py-3">S/N</th>
                     <th className="px-6 py-3">Trip Title</th>
@@ -73,7 +73,7 @@ function UserReservationList() {
                     return (
                       <tr
                         key={id}
-                        className="bg-white border-b dark:bg-gray-800/60 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
+                        className="bg-white border-b bg-white/50 dark:bg-gray-800/60 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                       >
                         <td className="px-3 py-2">{index + 1}</td>
                         <td className="px-3 py-2">{trip.title}</td>

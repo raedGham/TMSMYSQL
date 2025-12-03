@@ -11,7 +11,7 @@ function Destination() {
     (state) => state.trip
   );
 
-  const activeTrips = trips.filter((t)=> t.status === "active")
+  const activeTrips = trips.filter((t) => t.status === "active");
 
   useEffect(() => {
     dispatch(fetchTrips());
@@ -19,7 +19,7 @@ function Destination() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen text-lg font-semibold text-gray-500">
+      <div className="flex justify-center items-center h-screen text-lg font-semibold text-black dark:text-gray-500">
         Loading destinations...
       </div>
     );
@@ -36,7 +36,7 @@ function Destination() {
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
       {/* Page Header */}
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-300 my-10">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-black dark:text-gray-300 my-10">
         Find Your Best Destination
       </h2>
 
