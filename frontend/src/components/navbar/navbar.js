@@ -9,6 +9,8 @@ import {
   selectType,
 } from "../../redux/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import ToggleTheme from "../../components/toggleTheme/toggleTheme";
+
 
 export default function Navbar() {
   const [openAdmin, setOpenAdmin] = useState(false);
@@ -202,9 +204,10 @@ export default function Navbar() {
                 className="px-4 py-2 bg-white text-black rounded-full hover:bg-gray-200 transition"
               >
                 Login
-              </Link>
+              </Link>              
             )}
           </li>
+          <ToggleTheme/>
         </ul>
       </div>
     </nav>

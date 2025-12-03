@@ -12,6 +12,8 @@ import reservationReducer from "./features/reservation/ReservationSlice";
 import paymentReducer from "./features/payment/paymentSlice";
 import complaintReducer from "./features/complaint/complaintSlice";
 import complaintFilterReducer from "./features/complaint/ComplaintFilterSlice";
+import themeReducer from "./features/theme/themeSlice";
+
 
 export const store = configureStore({
   reducer: {
@@ -28,5 +30,6 @@ export const store = configureStore({
     payment: paymentReducer,
     complaint: complaintReducer,
     complaintFilter: complaintFilterReducer,
+    theme: themeReducer,
   },
 });
