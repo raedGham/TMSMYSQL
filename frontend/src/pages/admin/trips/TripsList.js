@@ -116,7 +116,7 @@ const TripsList = () => {
           </p>
         ) : (
           <table className="min-w-full text-sm text-left text-gray-500 dark:text-gray-200 mt-2">
-            <thead className="text-[11px] uppercase bg-gray-50/50 dark:bg-gray-900 dark:text-gray-200 ">
+            <thead className="text-[11px] uppercase bg-gray-50/50 text-black dark:bg-gray-900 dark:text-gray-200 ">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   S/N
@@ -166,7 +166,7 @@ const TripsList = () => {
                 return (
                   <tr
                     key={id}
-                    className="bg-white/50 border-b dark:bg-gray-800/60 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
+                    className=" text-black bg-white/50 border-b dark:bg-gray-800/60 dark:text-gray-50 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                   >
                     <td className="px-3 py-2">{index + 1}</td>
                     <td className="px-3 py-2">{title}</td>

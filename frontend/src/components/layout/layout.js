@@ -2,7 +2,7 @@ import Navbar from "../navbar/navbar";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import heroImg from "../../assets/welcome.jpg";
-import heroImgLight from "../../assets/travel.jpg";
+import heroImgLight from "../../assets/welcomeLight.jpg";
 
 export default function Layout({ children }) {
   const theme = useSelector((state) => state.theme.mode);

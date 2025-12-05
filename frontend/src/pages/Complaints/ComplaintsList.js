@@ -75,9 +75,9 @@ function ComplaintsList() {
   };
   return (
     <div className="">
-      <div className="w-full rounded-lg shadow  p-14 ml-8">
+      <div className="w-full rounded-lg shadow  p-16 ml-8">
         <div className="flex">
-          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white mb-2 mr-4 pt-2">
+          <h1 className="text-xl font-bold leading-tight tracking-tight  text-gray-900 md:text-2xl dark:text-white mb-2 mr-4 pt-2">
             User Complaints
           </h1>
           <Link
@@ -97,7 +97,7 @@ function ComplaintsList() {
           <p className=" text-gray-400 mt-2">-- No Complaints Found ...</p>
         ) : (
           <table className="min-w-full text-sm text-left text-gray-500 dark:text-gray-200 mt-2">
-            <thead className="text-[11px] uppercase bg-gray-50 dark:bg-gray-900 dark:text-gray-200 ">
+            <thead className="text-[11px] uppercase bg-gray-50/60 dark:bg-gray-900/60 dark:text-gray-200 ">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   S/N
@@ -136,7 +136,7 @@ function ComplaintsList() {
                     {/* Row 1: regular fields */}
                     <tr
                       key={`${id}-main`}
-                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
+                      className="bg-gray-50/60 border-b dark:bg-gray-800/60 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                     >
                       <td className="px-3 py-2">{index + 1}</td>
                       <td className="px-3 py-2">{category}</td>
@@ -167,7 +167,7 @@ function ComplaintsList() {
                     {/* Row 2: complaint text full width */}
                     <tr
                       key={`${id}-complaint`}
-                      className="bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-700"
+                      className="min-w-full bg-gray-50/60 dark:bg-gray-900/60 border-b dark:border-gray-700"
                     >
                       <td
                         colSpan={5}
@@ -182,7 +182,7 @@ function ComplaintsList() {
                     {/* Row 3: response */}
                     <tr
                       key={`${id}-complaint1`}
-                      className="bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-700"
+                      className="min-w-full bg-gray-50/60 dark:bg-gray-900/60 border-b dark:border-gray-700"
                     >
                       <td
                         colSpan={5}

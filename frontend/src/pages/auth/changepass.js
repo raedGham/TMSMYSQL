@@ -74,15 +74,15 @@ function ChangePass() {
           alt="logo"
         />
         Travel Lebanon
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-full bg-white/50 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Change Password
             </h1>
 
-            <div className="px-4 pb-2  font-semibold flex">
-              <p className=" text-white">{name} /</p>
-              <p className=" text-gray-300 ml-4 ">{email}</p>
+            <div className="px-4 pb-2  text-gray-900  dark:text-gray-50 font-semibold flex">
+              <p className="">{name} /</p>
+              <p className="ml-4 ">{email}</p>
             </div>
 
             <form className="space-y-4 md:space-y-6" onSubmit={changeP}>

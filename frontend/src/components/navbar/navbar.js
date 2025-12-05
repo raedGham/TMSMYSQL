@@ -58,7 +58,7 @@ export default function Navbar() {
           to="/"
           className="text-xl font-semibold text-gray-900 dark:text-gray-50"
         >
-          LOGO
+          Travel Lebanon
         </Link>
 
         {/* Menu */}
