@@ -30,7 +30,16 @@ const newReservation = asyncHandler(async (req, res) => {
 const getReservations = asyncHandler(async (req, res) => {
   const reservations = await Reservation.findAll({
     include: [
-      { model: Trip, as: "trip" },
+      { model: Trip, as: "trip", 
+
+          include: [
+            {
+              model: User,
+              as: "organizer",
+              attributes: ["id", "name", "email"], // choose what you need
+            },
+          ]
+        },
       { model: User, as: "user" },
     ],
   });

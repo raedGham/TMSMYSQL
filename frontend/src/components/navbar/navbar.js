@@ -83,7 +83,7 @@ export default function Navbar() {
 
           {/* Admin Dropdown */}
           {console.log(type)}
-          {type === "superuser" && (
+          {(type === "superuser" || type === "organizer") && (
             <li className="relative" ref={adminRef}>
               <button
                 onClick={() => {
@@ -96,8 +96,8 @@ export default function Navbar() {
               </button>
 
               {openAdmin && (
-                <ul className="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-800 text-black dark:text-gray-50 rounded-lg shadow-lg py-2">
-                  <li>
+                <ul className="absolute left-0 mt-2 w-48 bg-white dark:bg-white text-black dark:text-gray-900 rounded-lg shadow-lg py-2">
+                 { type==="superuser" && <li>
                     <Link
                       to="/admin/users"
                       className="block px-4 py-2 hover:bg-gray-100"
@@ -106,16 +106,17 @@ export default function Navbar() {
                       Manage Users
                     </Link>
                   </li>
+                } 
                   <li>
                     <Link
                       to="/admin/trips"
                       className="block px-4 py-2 hover:bg-gray-100"
                       onClick={() => setOpenAdmin(false)}
                     >
-                      Add Trips
+                      Manage Trips
                     </Link>
                   </li>
-                  <li>
+                  { type==="superuser" && <li>
                     <Link
                       to="/admin/complaints"
                       className="block px-4 py-2 hover:bg-gray-100"
@@ -123,7 +124,7 @@ export default function Navbar() {
                     >
                       Complaint Reponses
                     </Link>
-                  </li>
+                  </li>}
 
                   <li>
                     <Link
@@ -168,7 +169,8 @@ export default function Navbar() {
                     {/* User Info */}
                     <div className="px-4 pb-3 border-b border-gray-200">
                       <p className="font-semibold">{name}</p>
-                      <p className="text-sm text-gray-500">{email}</p>
+                      <p className="text-sm text-gray-500">{email} - <span className=" text-indigo-500">{type}</span> </p>
+                      
                     </div>
 
                     {/* Menu Items */}

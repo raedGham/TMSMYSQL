@@ -2,13 +2,17 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectIsLoggedIn,
+  selectUserID,
+  selectType,
 } from "../../../redux/features/auth/authSlice";
 import { fetchReservs } from "../../../redux/features/reservation/ReservationSlice";
 
 function AdminReservationList() {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 20;
+  const userID = useSelector(selectUserID)
+  const userType = useSelector(selectType)
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const { reserves } = useSelector((state) => state.reservation);
@@ -17,12 +21,19 @@ function AdminReservationList() {
     dispatch(fetchReservs());
   }, [dispatch]);
 
+  
+const organizerReserves =
+  userType === "superuser"
+    ? reserves
+    : reserves.filter(
+        (r) => String(r.trip.organizer.id) === String(userID)
+      );
+ 
   // Pagination Logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = reserves.slice(indexOfFirstItem, indexOfLastItem);
-
-  const totalPages = Math.ceil(reserves.length / itemsPerPage);
+  const currentItems = organizerReserves.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(organizerReserves.length / itemsPerPage);
 
   return (
     <div>
@@ -50,6 +61,7 @@ function AdminReservationList() {
                       <th className="px-6 py-3">No of People</th>
                       <th className="px-6 py-3">Total Cost</th>
                       <th className="px-6 py-3">Reserv Status</th>
+                       <th className="px-6 py-3">Trip Organizer</th>
                     </tr>
                   </thead>
 
@@ -86,6 +98,7 @@ function AdminReservationList() {
                             {trip.pricePerPerson * numberOfPeople}
                           </td>
                           <td className="px-3 py-2">{status}</td>
+                          <td className="px-3 py-2">{trip.organizer.name}</td>
                         </tr>
                       );
                     })}

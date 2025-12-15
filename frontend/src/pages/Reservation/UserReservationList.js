@@ -1,15 +1,19 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectUserID,
   selectIsLoggedIn,
 } from "../../redux/features/auth/authSlice";
-import { fetchReservs } from "../../redux/features/reservation/ReservationSlice";
+import { fetchReservs , deleteReserv} from "../../redux/features/reservation/ReservationSlice";
 import { BACKEND_URL } from "../../services/tripService";
+import { FaTrashAlt } from "react-icons/fa";
+import { confirmAlert } from "react-confirm-alert";
+
 
 function UserReservationList() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userID = useSelector(selectUserID);
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -24,6 +28,48 @@ function UserReservationList() {
   const userReserves = reserves.filter(
     (r) => String(r.userID) === String(userID)
   );
+
+ const delReservation = async (id) => {
+    await dispatch(deleteReserv(id));    
+    navigate("/userreservation");
+  };
+
+ const confirmDelete = (id) => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96 text-center">
+              <h1 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+                Delete Trip
+              </h1>
+              <p className="text-gray-700 dark:text-gray-300 mb-6">
+                Are you sure you want to delete this Reservation?
+              </p>
+              <div className="flex justify-center gap-4">
+                <button
+                  onClick={() => {
+                    delReservation(id);
+                    onClose();
+                  }}
+                  className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                >
+                  Delete
+                </button>
+                <button
+                  onClick={onClose}
+                  className="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400 transition"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      },
+    });
+  };
+
 
   return (
     <div className="">
@@ -105,6 +151,23 @@ function UserReservationList() {
                           <div className="rounded shadow-sm p-0 relative"></div>
                         </td>
                         <td>
+                         {status !== "completed"  && 
+                         
+                         
+                             <button
+                                title="Delete Reservation"
+                                    onClick={() => {
+                                     confirmDelete(id);
+                                      }}
+                              >
+                             <FaTrashAlt
+                               size={18}
+                               className="text-red-600 hover:text-red-800"
+                             />
+                           </button>
+
+                        }
+                        
                           <Link
                             to={
                               status === "completed"

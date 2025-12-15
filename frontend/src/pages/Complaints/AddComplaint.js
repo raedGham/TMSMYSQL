@@ -72,8 +72,7 @@ const AddComplaint = () => {
   };
 
   return (
-    <ComplaintForm
-      status={status}
+    <ComplaintForm      
       complaintText={complaintText}
       category={category}
       dateFiled={dateFiled}

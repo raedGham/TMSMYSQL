@@ -1,29 +1,39 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectIsLoggedIn } from "../../../redux/features/auth/authSlice";
+import { selectIsLoggedIn,   selectUserID,  selectType, } from "../../../redux/features/auth/authSlice";
 import { fetchPayments } from "../../../redux/features/payment/paymentSlice";
 
 function PaymentsList() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const userID = useSelector(selectUserID)
+  const userType = useSelector(selectType)
+
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // change as needed
+  const itemsPerPage = 20; // change as needed
 
   useEffect(() => {
     dispatch(fetchPayments());
   }, [dispatch]);
 
+
   const { payments } = useSelector((state) => state.payment);
 
+  const organizerPayments =
+  userType === "superuser"
+    ? payments
+    : payments.filter(
+        (r) => String(r.reservation.trip.organizer.id) === String(userID)
+      );
   // --------------------------
   // Pagination Logic
   // --------------------------
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = payments?.slice(indexOfFirstItem, indexOfLastItem) || [];
-  const totalPages = payments ? Math.ceil(payments.length / itemsPerPage) : 1;
+  const currentItems = organizerPayments?.slice(indexOfFirstItem, indexOfLastItem) || [];
+  const totalPages = organizerPayments ? Math.ceil(organizerPayments.length / itemsPerPage) : 1;
 
   // --------------------------
   // Pagination Buttons
@@ -113,6 +123,7 @@ function PaymentsList() {
                       <th className="px-6 py-3">Payment Date</th>
                       <th className="px-6 py-3">Amount Paid</th>
                       <th className="px-6 py-3">Payment Method</th>
+                      <th className="px-6 py-3">Trip Organizer</th>
                     </tr>
                   </thead>
 
@@ -142,6 +153,7 @@ function PaymentsList() {
                           </td>
                           <td className="px-3 py-2">{amount}</td>
                           <td className="px-3 py-2">{paymentMethod}</td>
+                           <td className="px-3 py-2">{reservation.trip?.organizer?.name}</td>
                         </tr>
                       );
                     })}

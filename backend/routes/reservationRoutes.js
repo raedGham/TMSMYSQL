@@ -12,11 +12,11 @@ const {
   updateResStatus,
 } = require("../controllers/reservationController");
 
-router.post("/new", protect, upload.none(), newReservation);
-router.get("/", protect, getReservations);
-router.get("/:id", protect, getReservation);
-router.delete("/:id", protect, deleteReservation);
-router.patch("/:id", protect, upload.none(), updateReservation);
+router.post("/new", upload.none(), newReservation);
+router.get("/",  getReservations);
+router.get("/:id",  getReservation);
+router.delete("/:id", deleteReservation);
+router.patch("/:id",  upload.none(), updateReservation);
 router.patch("/status/:id", upload.none(), updateResStatus);
 
 module.exports = router;

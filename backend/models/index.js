@@ -3,7 +3,7 @@ const User = require("./userModel");
 const TripImage = require("./tripImagesModel");
 const Trip = require("./tripModel");
 const Transportation = require("./transportationModel");
-const Token = require("./tokenModel");
+//const Token = require("./tokenModel");
 const Reservation = require("./reservationModel");
 const Payment = require("./paymentModel");
 const Activity = require("./activitiesModel");
@@ -34,8 +34,8 @@ Trip.hasMany(Transportation, {
   as: "transportations",
 });
 
-Token.belongsTo(User, { foreignKey: "userId" });
-User.hasMany(Token, { foreignKey: "userId", as: "tokens" });
+// Token.belongsTo(User, { foreignKey: "userId" });
+// User.hasMany(Token, { foreignKey: "userId", as: "tokens" });
 
 Reservation.belongsTo(Trip, { foreignKey: "tripID", as: "trip" });
 Trip.hasMany(Reservation, {
@@ -76,7 +76,7 @@ module.exports = {
   TripImage,
   Trip,
   Transportation,
-  Token,
+  // Token,
   Reservation,
   Payment,
   Activity,

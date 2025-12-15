@@ -33,8 +33,19 @@ const getPayments = asyncHandler(async (req, res) => {
       model: Reservation,
       as: "reservation",
       include: [
-        { model: Trip, as: "trip" },
+        { model: Trip, as: "trip", 
+
+          include: [
+            {
+              model: User,
+              as: "organizer",
+              attributes: ["id", "name", "email"], // choose what you need
+            },
+          ],
+
+        },
         { model: User, as: "user" },
+        
       ],
     },
   });

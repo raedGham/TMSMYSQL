@@ -15,6 +15,11 @@ import {
   FILTER_TRIPS,
   selectFilteredTrips,
 } from "../../../redux/features/trips/filterSlice";
+
+import {  
+  selectUserID,
+  selectType,
+} from "../../../redux/features/auth/authSlice";
 import ReactPaginate from "react-paginate";
 
 const TripsList = () => {
@@ -22,6 +27,9 @@ const TripsList = () => {
   const filteredTrips = useSelector(selectFilteredTrips);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userID = useSelector(selectUserID)
+  const userType = useSelector(selectType)
+
   const delTrip = async (id) => {
     await dispatch(deleteTrip(id));
     // await dispatch(fetchTrips());
@@ -69,6 +77,14 @@ const TripsList = () => {
     dispatch(fetchTrips());
   }, [dispatch]);
 
+const organizerTrips =
+  userType === "superuser"
+    ? filteredTrips
+    : filteredTrips.filter(
+        (r) => String(r.organizer.id) === String(userID)
+      );
+ 
+
   //   Begin Pagination
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
@@ -77,8 +93,8 @@ const TripsList = () => {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(filteredTrips.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(filteredTrips.length / itemsPerPage));
+    setCurrentItems(organizerTrips.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(organizerTrips.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, filteredTrips]);
 
   const handlePageClick = (event) => {
