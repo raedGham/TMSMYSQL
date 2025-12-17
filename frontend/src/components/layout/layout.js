@@ -8,6 +8,8 @@ export default function Layout({ children }) {
   const theme = useSelector((state) => state.theme.mode);
   const bg = theme === "dark" ? heroImg : heroImgLight;
 
+  console.log("---------------")
+  console.log(theme)
   return (
     <div className="relative w-full min-h-screen overflow-hidden">
       <img
@@ -18,8 +20,8 @@ export default function Layout({ children }) {
        {theme === "dark" ? (
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/40 z-10"></div>
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/50 to-black/40 z-10"></div>
-      )} 
+        <div className="absolute inset-0 bg-gradient-to-r from-white/50 via-white/40 to-black/20 z-10"></div>
+      )}  
       <div className="relative z-20">
         <Navbar />
         {children}
