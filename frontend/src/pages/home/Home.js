@@ -7,7 +7,7 @@ const Home = () => {
      <div className="relative w-full h-screen overflow-hidden">
    
        
-      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/40 z-10" />
+     <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/40 z-20" /> 
 
       {/* Content */}
       <div className="relative z-20 h-full flex flex-col md:flex-row justify-center items-center px-6 md:px-20 gap-10">

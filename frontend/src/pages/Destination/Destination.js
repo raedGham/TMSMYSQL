@@ -36,7 +36,7 @@ function Destination() {
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
       {/* Page Header */}
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-black dark:text-gray-300 my-10">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-500 dark:text-white my-10">
         Find Your Best Destination
       </h2>
 

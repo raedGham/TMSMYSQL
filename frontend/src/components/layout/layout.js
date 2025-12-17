@@ -15,11 +15,11 @@ export default function Layout({ children }) {
         alt="Background"
         className="absolute inset-0 w-full h-full object-cover object-center z-0"
       />
-      {theme === "dark" ? (
+       {theme === "dark" ? (
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/40 z-10"></div>
       ) : (
         <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/50 to-black/40 z-10"></div>
-      )}
+      )} 
       <div className="relative z-20">
         <Navbar />
         {children}

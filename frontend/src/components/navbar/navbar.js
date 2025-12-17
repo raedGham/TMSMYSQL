@@ -49,20 +49,21 @@ export default function Navbar() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
+ 
+ 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-sm">
+    <nav className="fixed top-0 left-0 w-full z-30 bg-transparent backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link
           to="/"
-          className="text-xl font-semibold text-gray-900 dark:text-gray-50"
+          className="text-xl font-semibold text-gray-500 dark:text-white"
         >
           Travel Lebanon
         </Link>
 
         {/* Menu */}
-        <ul className="flex items-center space-x-8 text-gray-900 dark:text-gray-50 font-medium">
+        <ul className="flex items-center space-x-8 text-gray-500 dark:text-white font-medium">
           <li>
             <Link to="/destination" className="hover:text-gray-300">
               Destinations
