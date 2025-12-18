@@ -13,9 +13,9 @@ import {
 } from "../../redux/features/complaint/complaintSlice";
 
 const initialState = {
-  status: "",
+  status: "new",
   complaintText: "",
-  category: "",
+  category: "Other",
   DateFiled: "",
 };
 
@@ -43,7 +43,7 @@ const AddComplaint = () => {
     e.preventDefault();
 
     // validation
-    if (!dateFiled || !status || !category || !complaintText) {
+    if (!dateFiled || !category || !complaintText) {
       return toast.error("Missing Fields");
     }
 
@@ -72,7 +72,7 @@ const AddComplaint = () => {
   };
 
   return (
-    <ComplaintForm      
+    <ComplaintForm
       complaintText={complaintText}
       category={category}
       dateFiled={dateFiled}

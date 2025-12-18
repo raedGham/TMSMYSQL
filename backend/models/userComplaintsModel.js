@@ -29,8 +29,14 @@ const Complaint = sequelize.define(
     },
 
     category: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM(
+        "Transportation",
+        "Management",
+        "Lost Belongings",
+        "Other"
+      ),
       allowNull: false,
+      defaultValue: "Other",
     },
 
     status: {
